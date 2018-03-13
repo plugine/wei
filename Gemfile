@@ -16,6 +16,13 @@ gem 'jbuilder', '~> 2.0'
 # using puma as default server
 gem 'puma'
 
+# pagination
+gem 'kaminari'
+
+gem 'sinatra', require: false
+
+gem 'whenever'
+
 # for background job schedule
 gem 'sidekiq', '< 5'
 

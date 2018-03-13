@@ -76,6 +76,7 @@ GEM
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+    chronic (0.10.2)
     coderay (1.1.2)
     concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
@@ -103,6 +104,18 @@ GEM
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
     json (1.8.6)
+    kaminari (1.1.1)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.1.1)
+      kaminari-activerecord (= 1.1.1)
+      kaminari-core (= 1.1.1)
+    kaminari-actionview (1.1.1)
+      actionview
+      kaminari-core (= 1.1.1)
+    kaminari-activerecord (1.1.1)
+      activerecord
+      kaminari-core (= 1.1.1)
+    kaminari-core (1.1.1)
     loofah (2.2.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -199,6 +212,8 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
+    sinatra (1.0)
+      rack (>= 1.0)
     spring (2.0.2)
       activesupport (>= 4.2)
     sprockets (3.7.1)
@@ -224,6 +239,8 @@ GEM
       activemodel (>= 4.2)
       debug_inspector
       railties (>= 4.2)
+    whenever (0.10.0)
+      chronic (>= 0.6.3)
 
 PLATFORMS
   ruby
@@ -244,6 +261,7 @@ DEPENDENCIES
   faker
   httparty
   jbuilder (~> 2.0)
+  kaminari
   minitest-reporters
   mocha (~> 0.14.0)
   mysql2 (>= 0.3.13, < 0.5)
@@ -256,10 +274,12 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sidekiq (< 5)
   simplecov
+  sinatra
   spring
   test_after_commit
   uglifier (>= 1.3.0)
   web-console
+  whenever
 
 BUNDLED WITH
    1.16.1
