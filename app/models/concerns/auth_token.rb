@@ -2,8 +2,9 @@ module AuthToken
   extend ActiveSupport::Concern
 
   included do
-    def from_token(token)
-      self.find_by(id: JWT.decode(token, nil, false).first)
+
+    def self.from_token(token)
+      self.find_by(id: JWT.decode(token, nil, false).first['id'])
     end
   end
 

@@ -1,8 +1,4 @@
 class User::AdminUser < ActiveRecord::Base
-
-  def table_name_prefix
-    'user_'
-  end
   include AuthToken
 
   has_secure_password
