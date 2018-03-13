@@ -43,6 +43,7 @@ GEM
       rake (>= 10.4, < 13.0)
     ansi (1.5.0)
     arel (6.0.4)
+    bcrypt (3.1.11)
     better_errors (2.4.0)
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
@@ -104,6 +105,7 @@ GEM
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
     json (1.8.6)
+    jwt (1.5.6)
     kaminari (1.1.1)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.1.1)
@@ -247,6 +249,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate (>= 2.5.0)
+  bcrypt (~> 3.1.7)
   better_errors
   binding_of_caller
   byebug
@@ -261,6 +264,7 @@ DEPENDENCIES
   faker
   httparty
   jbuilder (~> 2.0)
+  jwt
   kaminari
   minitest-reporters
   mocha (~> 0.14.0)

@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+unless User::AdminUser.find_by(id: 1)
+  User::AdminUser.create(account: 'yeehandsome', password: 'P@ss!Com,Net25-CN30!##')
+end

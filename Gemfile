@@ -12,6 +12,9 @@ gem 'uglifier', '>= 1.3.0'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
+gem 'bcrypt', '~> 3.1.7'
+
+gem 'jwt'
 
 # using puma as default server
 gem 'puma'

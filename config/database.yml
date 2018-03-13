@@ -14,12 +14,12 @@ default: &default
   encoding: utf8
   pool: 5
   username: root
-  password:
+  password: 999999
   socket: /tmp/mysql.sock
 
 development:
   <<: *default
-  database: wei_development
+  database: wei_dev
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -49,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: wei_production
-  username: wei
+  database: wei_pd
+  username: root
   password: <%= ENV['WEI_DATABASE_PASSWORD'] %>
