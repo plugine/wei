@@ -7,6 +7,7 @@ end if Rails.env.production?
 
 Wei::Application.routes.draw do
 
+  resource :wechat, only: [:show, :create]
   mount Sidekiq::Web => '/admin/sidekiq'
 
 end
