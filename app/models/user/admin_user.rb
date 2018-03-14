@@ -1,5 +1,6 @@
 class User::AdminUser < ActiveRecord::Base
   include AuthToken
+  include Errorable
 
   has_secure_password
 
