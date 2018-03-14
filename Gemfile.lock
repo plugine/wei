@@ -173,6 +173,7 @@ GEM
     public_suffix (2.0.5)
     puma (3.11.3)
     rack (1.6.9)
+    rack-cors (1.0.2)
     rack-protection (2.0.1)
       rack
     rack-test (0.6.3)
@@ -295,6 +296,7 @@ DEPENDENCIES
   pry-rails
   pry-stack_explorer
   puma
+  rack-cors
   rails (= 4.2.6)
   redis
   sass-rails (~> 5.0)

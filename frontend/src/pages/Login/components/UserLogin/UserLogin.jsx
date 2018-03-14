@@ -1,5 +1,6 @@
 /* eslint react/no-string-refs:0 */
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Input, Button, Checkbox, Grid } from '@icedesign/base';
 import {
   FormBinderWrapper as IceFormBinderWrapper,
@@ -47,7 +48,24 @@ export default class UserLogin extends Component {
         return;
       }
       console.log('values:', values);
-      this.props.push('/');
+      const that = this;
+      axios.post('http://localhost:3000/admin/login', {
+        account: values.account,
+        password: values.password
+      })
+        .then(function (response) {
+          console.log(response);
+          if (response.data.code == 200) {
+            localStorage.authentication = response.data.authentication
+            that.props.push('/');
+          } else {
+            alert(response.data.error);
+          }
+        })
+        .catch(function (error) {
+          alert(error);
+        });
+      // this.props.push('/');
     });
   };
 
@@ -62,7 +80,7 @@ export default class UserLogin extends Component {
         />
         <div style={styles.contentWrapper} className="content-wrapper">
           <h2 style={styles.slogan} className="slogan">
-            欢迎使用 <br /> ICE 内容管理系统
+            欢迎使用 <br /> Healo 系统
           </h2>
           <div style={styles.formContainer}>
             <h4 style={styles.formTitle}>登录</h4>
