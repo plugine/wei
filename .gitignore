@@ -7,7 +7,7 @@
 .DS_Store
 dump.rdb
 capybara-*.html
-
+frontend/node_modules
 *.rbc
 *.sassc
 *.swp
