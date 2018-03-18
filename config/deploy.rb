@@ -30,6 +30,8 @@ set :pty, false
 # Default value for :linked_files is []
 # set :linked_files, %w{config/database.yml}
 
+set :rbenv_map_bins, %w{rake gem bundle ruby rails sidekiq sidekiqctl}
+
 # Default value for linked_dirs is []
 set :linked_dirs, %w(log tmp/pids tmp/cache tmp/sockets public/assets public/uploads db/exports)
 
@@ -51,7 +53,6 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      invoke 'puma:restart'
     end
   end
 
@@ -71,7 +72,11 @@ namespace :deploy do
     end
   end
 
-  after 'symlink:shared', 'symlink:custom'
-
+  after :restart, :'puma:restart'
   after :publishing, :restart
+  after 'symlink:shared', 'symlink:custom'
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+    end
+  end
 end

@@ -36,6 +36,9 @@ gem 'sidekiq', '< 5'
 # for cache
 gem 'redis'
 
+
+gem 'redis-namespace'
+
 # for file upload
 gem 'carrierwave'
 
@@ -67,6 +70,7 @@ group :development do
   gem 'capistrano-rails', '1.1.3'
   gem 'capistrano-rvm', require: false
   gem 'capistrano-sidekiq', require: false
+  gem 'capistrano3-puma'
   gem 'annotate', '>=2.5.0'
   gem 'spring'
   gem 'web-console'

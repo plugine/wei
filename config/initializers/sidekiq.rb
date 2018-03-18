@@ -8,11 +8,11 @@ redis_url =
     end
 
 Sidekiq.configure_server do |config|
-  config.redis = { url: redis_url, namespace: 'one' }
+  config.redis = { url: redis_url, namespace: 'wei' }
 end
 
 Sidekiq.configure_client do |config|
-  config.redis = { url: redis_url, namespace: 'one' }
+  config.redis = { url: redis_url, namespace: 'wei' }
 end
 
 Sidekiq.default_worker_options = { retry: 3, backtrace: true }
