@@ -23,13 +23,10 @@ require 'capistrano/rails/assets'
 
 require 'capistrano/rails/migrations' unless ENV['disable_db'] == '1'
 
-require 'capistrano/sweet'
-require 'capistrano3/puma'
 require 'capistrano/sidekiq'
 
 require 'whenever/capistrano' unless ENV['disable_db'] == '1'
 
-install_plugin Capistrano::Puma
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }

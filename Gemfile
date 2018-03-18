@@ -66,7 +66,6 @@ group :development do
   gem 'capistrano', '3.5.0', require: false
   gem 'capistrano-rails', '1.1.3'
   gem 'capistrano-rvm', require: false
-  gem 'capistrano3-puma', require: false
   gem 'capistrano-sidekiq', require: false
   gem 'annotate', '>=2.5.0'
   gem 'spring'
