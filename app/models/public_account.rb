@@ -1,16 +1,7 @@
 class PublicAccount < ActiveRecord::Base
-  include Errorable
 
-  validates_presence_of :name, :account, :appid, :appsecret
-  validates_uniqueness_of :name, :appid, :account
+  scope :order_desc ,->{ order(id: :desc) }
 
-  def to_api_json
-    {
-        id: id,
-        name: name,
-        account: account,
-        appid: appid,
-        created_at: created_at
-    }
-  end
+  has_many :users
+  belongs_to :company
 end

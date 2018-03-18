@@ -14,6 +14,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jbuilder', '~> 2.0'
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'mini_magick'
+
 gem 'jwt'
 
 gem 'rack-cors', :require => 'rack/cors'
@@ -64,7 +66,7 @@ group :development do
   gem 'capistrano', '3.5.0', require: false
   gem 'capistrano-rails', '1.1.3'
   gem 'capistrano-rvm', require: false
-  gem 'capistrano3-unicorn', require: false
+  gem 'capistrano3-puma', require: false
   gem 'capistrano-sidekiq', require: false
   gem 'annotate', '>=2.5.0'
   gem 'spring'

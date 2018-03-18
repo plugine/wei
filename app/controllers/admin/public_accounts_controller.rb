@@ -1,11 +1,12 @@
 module Admin
+
   class PublicAccountsController < BaseController
     before_action :set_account, except: [:index]
 
     def index
       render json: {
           code: 200,
-          public_accounts: PublicAccount.order_desc.map(&:to_api_json)
+          public_accounts: @current_user.company.public_accounts.order_desc.map(&:as_json)
       }
     end
 
@@ -30,10 +31,12 @@ module Admin
 
     def set_account
       @account = PublicAccount.find(params[:id])
+      raise PermissionError unless @account.company_id == current_user.company_id
     end
 
     def account_params
       params.permit(:name, :appid, :appsecret)
     end
+
   end
 end

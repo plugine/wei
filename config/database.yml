@@ -15,7 +15,7 @@ default: &default
   pool: 5
   username: root
   password: 999999
-  socket: /tmp/mysql.sock
+  host: 127.0.0.1
 
 development:
   <<: *default
@@ -51,4 +51,4 @@ production:
   <<: *default
   database: wei_pd
   username: root
-  password: <%= ENV['WEI_DATABASE_PASSWORD'] %>
+  password: passgz6374

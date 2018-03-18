@@ -3,11 +3,11 @@ module Admin
     skip_before_action :current_user, only: [:create]
 
     def create
-      user = User::AdminUser.find_by(account: params[:account])
+      user = CropUser.find_by_account(params[:account])
       unless user&.authenticate(params[:password])
         return render json: {code: 401, error: '用户名或密码错误', bicode: 10003}
       end
-      render json: {code: 200, user: user.as_api_json, authentication: user.token}
+      render json: {code: 200, user: user.as_json, authentication: user.token}
     end
 
   end

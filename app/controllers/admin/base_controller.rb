@@ -33,14 +33,20 @@ module Admin
     end
 
     def current_user
+      @current_user ||= set_current_user
+    end
+
+    def set_current_user
       token = request.headers['Authentication']
+      token ||=params[:Authentication]
       unless token
         render json: {code: 403, error: '请先登陆', bicode: 10001}
       end
 
-      unless (@current_user = AdminUser.from_token(token))
-        render json: {code: 403, error: '登陆信息已过期', bicode: 10002}
+      unless (user = CropUser.from_token(token))
+        return render json: {code: 403, error: '登陆信息已过期', bicode: 10002}
       end
+      user
     end
 
   end
