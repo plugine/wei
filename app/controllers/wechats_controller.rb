@@ -1,8 +1,26 @@
-class WechatsController < ActionController::Base
-  # For details on the DSL available within this file, see https://github.com/Eric-Guo/wechat#wechat_responder---rails-responder-controller-dsl
+class WechatsController < ApplicationController
+  include WechatService
+
+  before_action :set_message, only: :create
+
   wechat_responder
 
-  on :text do |request, content|
-    request.reply.text "echo: #{content}" # Just echo
+  def show
+    return render plain: 'Forbidden' unless verify_signature
+    render text: params[:echostr]
+  end
+
+  def create
+    render xml: Wechat::Message.new({}).text(@message['Content'])
+  end
+
+  private
+
+  def verify_signature
+    params[:signature] == Wechat::Signature.hexdigest('je99znyl3b1sv499', params[:timestamp], params[:nonce], nil)
+  end
+
+  def set_message
+    @message = Wechat::Message.from_hash Hash.from_xml(request.raw_post)
   end
 end

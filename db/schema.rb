@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20180317120110) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name",       limit: 255,                        null: false
-    t.date     "expire_at",              default: '2019-03-17'
+    t.date     "expire_at",              default: '2019-03-20'
     t.boolean  "enabled",                default: true
     t.datetime "created_at"
     t.datetime "updated_at"
