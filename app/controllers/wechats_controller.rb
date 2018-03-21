@@ -1,3 +1,5 @@
+
+
 class WechatsController < ApplicationController
   include WechatService
 
