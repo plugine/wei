@@ -23,7 +23,7 @@ class WechatsController < ApplicationController
     nonce = params[:nonce]
     array = [token, timestamp, nonce]
     dev_msg_signature = array.compact.collect(&:to_s).sort.join
-    Digest::SHA1.hexdigest(dev_msg_signature)
+    Digest::SHA1.hexdigest(dev_msg_signature) == params[:signature]
   end
 
   def set_message
