@@ -11,8 +11,10 @@ class WechatsController < ApplicationController
   end
 
   def create
-    return (head :unauthorized) unless verify_signature
-    render xml: Wechat::Message.new({}).text(@message['Content'])
+    # return (head :unauthorized) unless verify_signature
+    api = account_api @message[:ToUserName]
+    api.custom_message_send @message.reply.text(@message.content)
+    render plain: 'ok'
   end
 
   private
