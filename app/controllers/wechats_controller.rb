@@ -16,8 +16,8 @@ class WechatsController < ApplicationController
     logger.info "message.to_json: \n #{@message.to_json}\n\n"
     logger.info "message to user name: #{@message[:ToUserName]}"
     api = account_api @message[:ToUserName]
-    api.custom_message_send @message.reply.text(@message.content)
-    render plain: 'ok'
+    api.custom_message_send @message.reply.text(@message[:Content])
+    render text: 'ok'
   end
 
   private
