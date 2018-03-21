@@ -12,7 +12,8 @@ class WechatsController < ApplicationController
 
   def create
     return (head :unauthorized) unless verify_signature
-    logger.info "request body: \n#{request.body.read}\n\n"
+    logger.info "request body: \n#{request.raw_post}\n\n"
+    logger.info "message.to_json: \n #{message.to_json}\n\n"
     logger.info "message to user name: #{@message[:ToUserName]}"
     api = account_api @message[:ToUserName]
     api.custom_message_send @message.reply.text(@message.content)
@@ -31,6 +32,6 @@ class WechatsController < ApplicationController
   end
 
   def set_message
-    @message = Wechat::Message.from_hash Hash.from_xml(request.raw_post)
+    @message = Wechat::Message.from_hash Hash.from_xml(request.raw_post)['xml'].symbolize_keys
   end
 end
