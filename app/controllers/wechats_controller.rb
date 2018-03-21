@@ -3,14 +3,13 @@ class WechatsController < ApplicationController
 
   before_action :set_message, only: :create
 
-  wechat_responder
-
   def show
-    return render plain: 'Forbidden' unless verify_signature
+    return (head :unauthorized) unless verify_signature
     render text: params[:echostr]
   end
 
   def create
+    return (head :unauthorized) unless verify_signature
     render xml: Wechat::Message.new({}).text(@message['Content'])
   end
 
