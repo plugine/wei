@@ -18,7 +18,12 @@ class WechatsController < ApplicationController
   private
 
   def verify_signature
-    params[:signature] == Wechat::Signature.hexdigest('je99znyl3b1sv499', params[:timestamp], params[:nonce], nil)
+    token = 'je99znyl3b1sv499'
+    timestamp = params[:timestamp]
+    nonce = params[:nonce]
+    array = [token, timestamp, nonce]
+    dev_msg_signature = array.compact.collect(&:to_s).sort.join
+    Digest::SHA1.hexdigest(dev_msg_signature)
   end
 
   def set_message
