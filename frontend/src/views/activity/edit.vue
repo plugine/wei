@@ -1,5 +1,5 @@
 <template>
-  <activity-editor :is-edit='false'></activity-editor>
+  <activity-editor :is-edit='true'></activity-editor>
 </template>
 
 <script>

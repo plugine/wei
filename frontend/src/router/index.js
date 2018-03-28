@@ -126,6 +126,7 @@ export const asyncRouterMap = [
     children: [
       { path: '', component: _import('activity/index'), name: 'activity-list', meta: { title: '活动列表' }},
       { path: 'new', component: _import('activity/new'), name: 'activity-new', meta: { title: '新建活动' }},
+      { path: 'edit/:id', component: _import('activity/edit'), name: 'activity-edit',  hidden: true, meta: {title: '更改活动'}}
     ]
   },
 

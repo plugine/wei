@@ -1,6 +1,6 @@
 <template>
-  <div class="json-editor">
-    <textarea ref="textarea"></textarea>
+  <div class="ruby-editor">
+    <textarea ref="textarea" v-model='content'></textarea>
   </div>
 </template>
 
@@ -13,57 +13,60 @@ import 'codemirror/mode/ruby/ruby'
 import 'codemirror/addon/lint/lint'
 
 export default {
-  name: 'jsonEditor',
+  name: 'rubyEditor',
   data() {
     return {
-      jsonEditor: false
+      content: ''
+      rubyEditor: false
     }
   },
   props: ['value'],
   watch: {
     value(value) {
-      const editor_value = this.jsonEditor.getValue()
+      puts value;
+      const editor_value = this.rubyEditor.getValue()
       if (value !== editor_value) {
-        this.jsonEditor.setValue(JSON.stringify(this.value, null, 2))
+        this.rubyEditor.setValue(this.value)
       }
     }
   },
   mounted() {
-    this.jsonEditor = CodeMirror.fromTextArea(this.$refs.textarea, {
-      lineNumbers: true,
+
+    this.rubyEditor = CodeMirror.fromTextArea(this.$refs.textarea, {
+      lineNumbers: false,
       mode: 'ruby',
       gutters: ['CodeMirror-lint-markers'],
       theme: 'darcula',
-      lint: true
+      lint: false
     })
 
-    this.jsonEditor.setValue(JSON.stringify(this.value, null, 2))
-    this.jsonEditor.on('change', cm => {
+    this.rubyEditor.setValue(this)
+    this.rubyEditor.on('change', cm => {
       this.$emit('changed', cm.getValue())
       this.$emit('input', cm.getValue())
     })
   },
   methods: {
     getValue() {
-      return this.jsonEditor.getValue()
+      return this.rubyEditor.getValue()
     }
   }
 }
 </script>
 
 <style scoped>
-.json-editor{
+.ruby-editor{
   height: 100%;
   position: relative;
 }
-.json-editor >>> .CodeMirror {
+.ruby-editor >>> .CodeMirror {
   height: auto;
   min-height: 300px;
 }
-.json-editor >>> .CodeMirror-scroll{
+.ruby-editor >>> .CodeMirror-scroll{
   min-height: 300px;
 }
-.json-editor >>> .cm-s-rubyblue span.cm-string {
+.ruby-editor >>> .cm-s-rubyblue span.cm-string {
   color: #F08047;
 }
 </style>

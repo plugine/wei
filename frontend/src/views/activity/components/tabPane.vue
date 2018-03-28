@@ -34,7 +34,7 @@
 
     <el-table-column class-name="status-col" label="操作" width="110">
       <template slot-scope="scope">
-        <router-link :to="'/activities/'+scope.row.id+'/edit'">编辑</router-link>
+        <router-link :to="'/activity/edit/'+scope.row.id">编辑</router-link>
       </template>
     </el-table-column>
 

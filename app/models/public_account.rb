@@ -5,4 +5,9 @@ class PublicAccount < ActiveRecord::Base
   has_many :users
   has_many :activities
   belongs_to :company
+
+
+  def as_json
+    super
+  end
 end
