@@ -8,26 +8,28 @@
       </template>
     </el-table-column>
 
-    <el-table-column width="200px" align="center" label="活动名称">
+    <el-table-column width="130px" align="center" label="名称">
       <template slot-scope="scope">
         <span>{{scope.row.name}}</span>
       </template>
     </el-table-column>
-    <el-table-column width="150px" align="center" label="公众号">
+
+    <el-table-column width="150px" align="center" label="账号">
       <template slot-scope="scope">
-        <span>{{scope.row.public_account.name}}</span>
+        <span>{{scope.row.account}}</span>
       </template>
     </el-table-column>
 
-    <el-table-column width="110px" align="center" label="活动描述">
+    <el-table-column width="110px" align="center" label="appID">
       <template slot-scope="scope">
-        <span>{{scope.row.desc}}</span>
+        <span>{{scope.row.appid}}</span>
       </template>
     </el-table-column>
 
-    <el-table-column width="120px" label="专属序列号">
+
+    <el-table-column width="110px" align="center" label="Secret">
       <template slot-scope="scope">
-        <span>{{scope.row.idx}}</span>
+        <span>{{scope.row.appsecret}}</span>
       </template>
     </el-table-column>
 
@@ -39,7 +41,7 @@
 
     <el-table-column class-name="status-col" label="操作" width="110">
       <template slot-scope="scope">
-        <router-link :to="'/activity/edit/'+scope.row.id">编辑</router-link>
+        <router-link :to="'/public_account/edit/'+scope.row.id">编辑</router-link>
         <a @click='del(scope.row.id)'>删除</a>
       </template>
     </el-table-column>
@@ -48,7 +50,7 @@
 </template>
 
 <script>
-import { fetchActivityList, deleteActivity } from '@/api/activity'
+import { fetchAccountList, deleteAccount } from '@/api/account'
 
 export default {
   props: {
@@ -68,8 +70,8 @@ export default {
   },
   methods: {
     del(id) {
-      if (confirm("确定要删除这个活动？")) {
-        deleteActivity(id).then(response => {
+      if (confirm("确定要删除这个公众号？")) {
+        deleteAccount(id).then(response => {
           this.getList()
         })
       }
@@ -77,9 +79,8 @@ export default {
     getList() {
       this.loading = true
       this.$emit('create') // for test
-      fetchActivityList({}).then(response => {
-        console.log(response)
-        this.list = response.data.activities
+      fetchAccountList().then(response => {
+        this.list = response.data.public_accounts
         this.loading = false
       })
     }

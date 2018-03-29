@@ -46,6 +46,7 @@ export const constantRouterMap = [
   {
     path: '/documentation',
     component: Layout,
+    hidden: true,
     redirect: '/documentation/index',
     children: [{
       path: 'index',
@@ -66,6 +67,7 @@ export const asyncRouterMap = [
   {
     path: '/permission',
     component: Layout,
+    hidden: true,
     redirect: '/permission/index',
     meta: { roles: ['admin'] }, // you can set roles in root nav
     children: [{
@@ -83,6 +85,7 @@ export const asyncRouterMap = [
   {
     path: '/icon',
     component: Layout,
+    hidden: true,
     children: [{
       path: 'index',
       component: _import('svg-icons/index'),
@@ -96,6 +99,7 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: 'noredirect',
     name: 'component-demo',
+    hidden: true,
     meta: {
       title: 'components',
       icon: 'component'
@@ -129,11 +133,27 @@ export const asyncRouterMap = [
       { path: 'edit/:id', component: _import('activity/edit'), name: 'activity-edit',  hidden: true, meta: {title: '更改活动'}}
     ]
   },
+  {
+    path: '/public_account',
+    component: Layout,
+    redirect: 'noredirect',
+    name: 'public-account',
+    meta: {
+      title: '公众号',
+      icon: 'component'
+    },
+    children: [
+      { path: '', component: _import('public_account/index'), name: 'public-account-list', meta: { title: '公众号列表' }},
+      { path: 'new', component: _import('public_account/new'), name: 'public-account-new', meta: { title: '新建公众号' }},
+      { path: 'edit/:id', component: _import('public_account/edit'), name: 'public-account-edit',  hidden: true, meta: {title: '修改公众号'}}
+    ]
+  },
 
   {
     path: '/charts',
     component: Layout,
     redirect: 'noredirect',
+    hidden: true,
     name: 'charts',
     meta: {
       title: 'charts',
@@ -151,6 +171,7 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: '/example/table/complex-table',
     name: 'example',
+    hidden: true,
     meta: {
       title: 'example',
       icon: 'example'
@@ -182,6 +203,7 @@ export const asyncRouterMap = [
     path: '/form',
     component: Layout,
     redirect: 'noredirect',
+    hidden: true,
     name: 'form',
     meta: {
       title: 'form',
@@ -197,6 +219,7 @@ export const asyncRouterMap = [
     path: '/error',
     component: Layout,
     redirect: 'noredirect',
+    hidden: true,
     name: 'errorPages',
     meta: {
       title: 'errorPages',
@@ -210,6 +233,7 @@ export const asyncRouterMap = [
 
   {
     path: '/error-log',
+    hidden: true,
     component: Layout,
     redirect: 'noredirect',
     children: [{ path: 'log', component: _import('errorLog/index'), name: 'errorLog', meta: { title: 'errorLog', icon: 'bug' }}]
@@ -217,6 +241,7 @@ export const asyncRouterMap = [
 
   {
     path: '/excel',
+    hidden: true,
     component: Layout,
     redirect: '/excel/export-excel',
     name: 'excel',
@@ -233,6 +258,7 @@ export const asyncRouterMap = [
 
   {
     path: '/zip',
+    hidden: true,
     component: Layout,
     redirect: '/zip/download',
     alwaysShow: true,
@@ -242,6 +268,7 @@ export const asyncRouterMap = [
 
   {
     path: '/theme',
+    hidden: true,
     component: Layout,
     redirect: 'noredirect',
     children: [{ path: 'index', component: _import('theme/index'), name: 'theme', meta: { title: 'theme', icon: 'theme' }}]
@@ -249,6 +276,7 @@ export const asyncRouterMap = [
 
   {
     path: '/clipboard',
+    hidden: true,
     component: Layout,
     redirect: 'noredirect',
     children: [{ path: 'index', component: _import('clipboard/index'), name: 'clipboardDemo', meta: { title: 'clipboardDemo', icon: 'clipboard' }}]
@@ -256,6 +284,7 @@ export const asyncRouterMap = [
 
   {
     path: '/i18n',
+    hidden: true,
     component: Layout,
     children: [{ path: 'index', component: _import('i18n-demo/index'), name: 'i18n', meta: { title: 'i18n', icon: 'international' }}]
   },

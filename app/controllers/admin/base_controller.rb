@@ -23,12 +23,13 @@ module Admin
     end
 
     def cors_preflight_check
+      logger.info "request method: #{request.method}"
       if request.method == :options
         headers['Access-Control-Allow-Origin'] = '*'
-        headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
+        headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS, PUT, DELETE'
         headers['Access-Control-Allow-Headers'] = 'X-Requested-With, X-Prototype-Version'
         headers['Access-Control-Max-Age'] = '1728000'
-        render :text => '', :content_type => 'text/plain'
+        render :text => '123', :content_type => 'text/plain'
       end
     end
 

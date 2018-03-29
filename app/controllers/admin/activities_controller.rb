@@ -16,6 +16,20 @@ module Admin
       render json: {code: 200, activity: @activity.to_api_json}
     end
 
+    def destroy
+      @activity = Activity.find(params[:id])
+      @activity.delete
+      render json: {code: 200}
+    end
+
+    def update
+      @activity = Activity.find(params[:id])
+      if @activity.update_attributes activity_params
+        return render json: {code: 200}
+      end
+      render json: {code: 419, error: @activity.errors.to_s}
+    end
+
     private
 
     def activity_params

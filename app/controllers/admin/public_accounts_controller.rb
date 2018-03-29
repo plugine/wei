@@ -1,13 +1,25 @@
 module Admin
 
   class PublicAccountsController < BaseController
-    before_action :set_account, except: [:index]
+    before_action :set_account, except: [:index, :create]
 
     def index
       render json: {
           code: 200,
-          public_accounts: @current_user.company.public_accounts.order_desc.map(&:as_json)
+          public_accounts: @current_user.company.public_accounts.order_desc.map(&:to_api_json)
       }
+    end
+
+    def show
+      render json: {code: 200, account: @account.to_api_json}
+    end
+
+    def create
+      @company = current_user.company.public_accounts.new account_params
+      if @company.save
+        return render json: {code: 200}
+      end
+      render json: {code: 419, error: @company.errors.to_s}
     end
 
     def update
@@ -35,7 +47,7 @@ module Admin
     end
 
     def account_params
-      params.permit(:name, :appid, :appsecret)
+      params.permit(:name, :account, :appid, :appsecret)
     end
 
   end

@@ -1,0 +1,2 @@
+module Activitiable
+end

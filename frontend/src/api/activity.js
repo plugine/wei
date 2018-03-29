@@ -15,6 +15,13 @@ export function fetchActivity(id) {
   })
 }
 
+export function deleteActivity(id) {
+  return request({
+    url: '/admin/activities/' + id,
+    method: 'delete'
+  })
+}
+
 export function createActivity(data) {
   return request({
     url: '/admin/activities',
@@ -22,7 +29,6 @@ export function createActivity(data) {
     data
   })
 }
-
 
 export function updateActivity(id, data) {
   return request({

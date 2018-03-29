@@ -4,7 +4,6 @@
 
 <script>
 import ActivityEditor from './components/ActivityEditor'
-
 export default {
   name: 'createForm',
   components: { ActivityEditor }

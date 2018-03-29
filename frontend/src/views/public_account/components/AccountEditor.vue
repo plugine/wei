@@ -18,39 +18,17 @@
           <el-col :span="21">
             <el-form-item style="margin-bottom: 40px;" prop="title">
               <MDinput name="name" v-model="postForm.name" required :maxlength="100">
-                活动名称
+                公众号名称
               </MDinput>
             </el-form-item>
 
             <div class="postInfo-container">
               <el-row>
-                <el-col :span="8">
-                  <el-tooltip class="item" effect="dark" content="输入活动作者" placement="top">
-                    <el-form-item label-width="50px" label="作者:" class="postInfo-container-item">
-                      <el-input placeholder="" style='min-width:150px;' v-model="postForm.author">
+                <el-col :span="18">
+                  <el-tooltip class="item" effect="dark" content="公众号账号" placement="top">
+                    <el-form-item label-width="80px" label="账号:" class="postInfo-container-item">
+                      <el-input placeholder="" style='min-width:150px;' v-model="postForm.account">
                       </el-input>
-                    </el-form-item>
-                  </el-tooltip>
-                </el-col>
-
-
-
-                <el-col :span="8">
-                  <el-tooltip class="item" effect="dark" content="输入活动序列号" placement="top">
-                    <el-form-item label-width="50px" label="序列:" class="postInfo-container-item">
-                      <el-input placeholder="" style='min-width:150px;' v-model="postForm.idx">
-                      </el-input>
-                    </el-form-item>
-                  </el-tooltip>
-                </el-col>
-                <el-col :span="8">
-                  <el-tooltip class="item" effect="dark" content="部署公众号" placement="top">
-
-                    <el-form-item label-width="80px" label="公众号:" class="postInfo-container-item">
-                      <el-select clearable class="filter-item" style="width: 130px" v-model="postForm.public_account_id" :placeholder="'选择部署公众号'">
-                        <el-option v-for="item in  accounts" :key="item.name" :label="item.name" :value="item.id">
-                        </el-option>
-                      </el-select>
                     </el-form-item>
                   </el-tooltip>
                 </el-col>
@@ -59,17 +37,15 @@
           </el-col>
         </el-row>
 
-        <el-form-item style="margin-bottom: 40px;" label-width="45px" label="描述:">
-          <el-input type="textarea" class="article-textarea" :rows="1" autosize placeholder="请输入内容" v-model="postForm.desc">
+        <el-form-item style="margin-bottom: 40px;" label-width="80px" label="APPID:">
+          <el-input type="textarea" class="article-textarea" :rows="1" autosize placeholder="请输入APPID" v-model="postForm.appid">
           </el-input>
         </el-form-item>
 
-
-        <div class="editor-container">
-          <el-form-item label-width="80px" label="模版代码:" class="postInfo-container-item">
-          </el-form-item>
-            <codemirror ref="rubyEditor" :options="cmOptions" :height=800 v-model="postForm.template"></codemirror>
-        </div>
+        <el-form-item style="margin-bottom: 40px;" label-width="80px" label="APPSecret:">
+          <el-input type="textarea" class="article-textarea" :rows="1" autosize placeholder="请输入APPSECRET" v-model="postForm.appsecret">
+          </el-input>
+        </el-form-item>
       </div>
     </el-form>
 
@@ -77,33 +53,22 @@
 </template>
 
 <script>
-import Upload from '@/components/Upload/singleImage3'
 import MDinput from '@/components/MDinput'
 import Multiselect from 'vue-multiselect'// 使用的一个多选框组件，element-ui的select不能满足所有需求
 import 'vue-multiselect/dist/vue-multiselect.min.css'// 多选框组件css
 import Sticky from '@/components/Sticky' // 粘性header组件
-import { validateURL } from '@/utils/validate'
-import { createActivity } from '@/api/activity'
-import { fetchActivity, updateActivity } from '@/api/activity'
-import { fetchAccountList } from '@/api/account'
-import 'codemirror/mode/ruby/ruby.js'
-import 'codemirror/theme/yeti.css'
-
-import { codemirror } from 'vue-codemirror'
-import 'codemirror/lib/codemirror.css'
+import { fetchAccount, createAccount, updateAccount } from '@/api/account'
 
 const defaultForm = {
   name: '',
-  template: '',
-  desc: '',
-  idx: 0,
-  author: '',
-  public_account_id: null
+  account: '',
+  appid: '',
+  appsecret: '',
 }
 
 export default {
-  name: 'activityEditor',
-  components: { MDinput, Upload, Multiselect, Sticky, codemirror },
+  name: 'accountEditor',
+  components: { MDinput, Multiselect, Sticky },
   props: {
     isEdit: {
       type: Boolean,
@@ -116,22 +81,12 @@ export default {
       value: '',
       postForm: Object.assign({}, defaultForm),
       fetchSuccess: true,
-      loading: false,
-      accounts: [],
-      cmOptions: {
-        // codemirror options
-        tabSize: 2,
-        mode: 'ruby',
-        lineNumbers: true,
-        line: true
-      }
+      loading: false
     }
   },
   computed: {
   },
   created() {
-
-    this.fetchList()
     if (this.isEdit) {
       this.id = this.$route.params.id
       this.fetchData(this.id)
@@ -140,16 +95,10 @@ export default {
     }
   },
   methods: {
-    fetchList() {
-       fetchAccountList().then(response => {
-        console.log(response.data);
-        this.accounts = response.data.public_accounts
-       })
-    },
     fetchData(id) {
-      fetchActivity(id).then(response => {
+      fetchAccount(id).then(response => {
         console.log(response.data);
-        this.postForm = response.data.activity
+        this.postForm = response.data.account
       }).catch(err => {
         this.fetchSuccess = false
         console.log(err)
@@ -160,18 +109,18 @@ export default {
       this.loading = true
       if (this.id == -1) {
         // 新建活动
-        createActivity(this.postForm).then(response => {
+        createAccount(this.postForm).then(response => {
           console.log(response.data)
           this.$notify({
             title: '成功',
-            message: '创建活动成功',
+            message: '创建活动公众号',
             type: 'success',
             duration: 2000
           })
           this.loading = false
         })
       } else {
-        updateActivity(this.id, this.postForm).then(response => {
+        updateAccount(this.id, this.postForm).then(response => {
           console.log(response.data)
           if (response.data.code != 200) {
             this.$notify({
@@ -198,6 +147,9 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss" scoped>
   @import "src/styles/mixin.scss";
+  .item {
+    text-align: left;
+  }
   .title-prompt{
     position: absolute;
     right: 0px;
