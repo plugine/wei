@@ -7,12 +7,11 @@ class CreateActivities < ActiveRecord::Migration
       t.text :desc
       t.text :consts
       t.text :template, null: false
-      t.integer :idx, null: false
+      t.string :qrurl
       t.integer :public_account_id
 
       t.timestamps null: false
 
-      t.index :idx
       t.index :public_account_id
     end
   end

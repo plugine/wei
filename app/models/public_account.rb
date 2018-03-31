@@ -4,12 +4,9 @@ class PublicAccount < ActiveRecord::Base
 
   has_many :users
   has_many :activities, dependent: :destroy
+  has_many :conditions, dependent: :destroy
   belongs_to :company
 
-
-  def as_json
-    super
-  end
 
   def to_api_json
     {

@@ -33,16 +33,6 @@
                   </el-tooltip>
                 </el-col>
 
-
-
-                <el-col :span="8">
-                  <el-tooltip class="item" effect="dark" content="输入活动序列号" placement="top">
-                    <el-form-item label-width="50px" label="序列:" class="postInfo-container-item">
-                      <el-input placeholder="" style='min-width:150px;' v-model="postForm.idx">
-                      </el-input>
-                    </el-form-item>
-                  </el-tooltip>
-                </el-col>
                 <el-col :span="8">
                   <el-tooltip class="item" effect="dark" content="部署公众号" placement="top">
 
@@ -53,6 +43,10 @@
                       </el-select>
                     </el-form-item>
                   </el-tooltip>
+                </el-col>
+
+                <el-col :span="8">
+                  <img style="max-width:100px;margin-left: 40px; margin-top: -30px;" v-bind:src='postForm.qrurl' v-if='postForm.qrurl != null'>
                 </el-col>
               </el-row>
             </div>
@@ -96,7 +90,7 @@ const defaultForm = {
   name: '',
   template: '',
   desc: '',
-  idx: 0,
+  qrurl: null,
   author: '',
   public_account_id: null
 }

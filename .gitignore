@@ -41,3 +41,4 @@ railways.cache
 photos
 .byebug_history
 /coverage
+/activities/*

@@ -20,13 +20,12 @@ ActiveRecord::Schema.define(version: 20180317120110) do
     t.text     "desc",              limit: 65535
     t.text     "consts",            limit: 65535
     t.text     "template",          limit: 65535,                 null: false
-    t.integer  "idx",               limit: 4,                     null: false
+    t.string   "qrurl",             limit: 255
     t.integer  "public_account_id", limit: 4
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
   end
 
-  add_index "activities", ["idx"], name: "index_activities_on_idx", using: :btree
   add_index "activities", ["public_account_id"], name: "index_activities_on_public_account_id", using: :btree
 
   create_table "activities_users", id: false, force: :cascade do |t|
@@ -38,7 +37,7 @@ ActiveRecord::Schema.define(version: 20180317120110) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name",       limit: 255,                        null: false
-    t.date     "expire_at",              default: '2019-03-26'
+    t.date     "expire_at",              default: '2019-04-01'
     t.boolean  "enabled",                default: true
     t.datetime "created_at"
     t.datetime "updated_at"

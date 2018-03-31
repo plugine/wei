@@ -10,7 +10,10 @@ module Wei
   class Application < Rails::Application
     config.autoload_paths += Dir["#{config.root}/app/models/[a-z]*s/"]
     config.autoload_paths += Dir["#{config.root}/app/services/"]
+    config.autoload_paths += Dir["#{config.root}/activities/"]
     config.autoload_paths += %W(#{config.root}/lib/)
+
+
 
     config.paths['config/routes.rb'].concat(Dir[config.root.join('config/routes/*.rb'), "#{config.root}/lib/**/*.rb"])
     config.time_zone = 'Beijing'

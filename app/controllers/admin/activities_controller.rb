@@ -33,7 +33,7 @@ module Admin
     private
 
     def activity_params
-      params.permit(:name, :author, :desc, :template, :idx, :public_account_id)
+      params.permit(:name, :author, :desc, :template, :public_account_id)
     end
   end
 end

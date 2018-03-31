@@ -1,14 +1,25 @@
 class Activity < ActiveRecord::Base
+  TICKET_BASE = 'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket='
+
   belongs_to :public_account
 
   has_and_belongs_to_many :users
 
-  after_create :save_template
+  after_commit :refresh_template, on: [:create, :update]
+
+  after_create :refresh_activity_qr
 
   validates_presence_of :name, :public_account_id
 
   def refresh_template
     File.open(filename, 'w') {|f| f.write prepare_template}
+    load_activity
+  end
+
+  def refresh_activity_qr
+    api = WechatService.instance.account_api public_account
+    ticket = (api.qrcode_create_limit_scene "base_#{self.id}")['ticket']
+    update qrurl: "#{TICKET_BASE}#{ticket}"
   end
 
   def to_api_json
@@ -19,7 +30,7 @@ class Activity < ActiveRecord::Base
         desc: desc,
         consts: consts,
         template: template,
-        idx: idx,
+        qrurl: qrurl,
         created_at: created_at.strftime("%Y-%m-%d"),
         public_account: {
             id: public_account_id,
@@ -33,23 +44,32 @@ class Activity < ActiveRecord::Base
   end
 
   def load_activity
-    require filename
-    prepare_class_name.constantize
+    load filename
   end
 
   private
 
   def prepare_template
-    prepared = <<END_OF_PREPARE
+    <<END_OF_PREPARE
     class Activity#{id}
+      include ErrorConst
       include Activitiable
       
+      def initialize(activity, user, api, account, message, join_result)
+        @activity = activity
+        @user = user
+        @api = api
+        @account = account
+        @message = message
+        @join_result = join_result
+      end
+
       #{template}
     end
 END_OF_PREPARE
   end
 
   def filename
-    "#{Rails.root}/#{public_account_id}_#{id}.rb"
+    "#{Rails.root}/activities/#{public_account_id}_#{id}.rb"
   end
 end
