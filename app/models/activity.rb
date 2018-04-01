@@ -1,5 +1,6 @@
 class Activity < ActiveRecord::Base
   TICKET_BASE = 'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket='
+  QINIU_BASE = 'http://searchnerd.qiniudn.com/'
 
   belongs_to :public_account
 
@@ -70,6 +71,6 @@ END_OF_PREPARE
   end
 
   def filename
-    "#{Rails.root}/activities/#{public_account_id}_#{id}.rb"
+    "#{Rails.root}/lib/activities/#{public_account_id}_#{id}.rb"
   end
 end

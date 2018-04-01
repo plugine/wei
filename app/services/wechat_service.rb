@@ -17,6 +17,6 @@ class WechatService
 
   def build_api(account)
     a = account
-    Wechat::Api.new a.appid, a.appsecret, "#{Rails.root}/tmp/token_#{a.name}", 5, true, "#{Rails.root}/tmp/jsticket_#{a.name}"
+    Wechat::Api.new a.appid, a.appsecret, "#{Rails.root}/tmp/token_#{a.id}", 5, true, "#{Rails.root}/tmp/jsticket_#{a.id}"
   end
 end
