@@ -42,6 +42,8 @@ gem 'redis-namespace'
 # for file upload
 gem 'carrierwave'
 
+gem 'qiniu', '>= 6.9.0'
+
 # for http api call
 gem 'httparty'
 

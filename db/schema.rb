@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180317120110) do
+ActiveRecord::Schema.define(version: 20180414120123) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "name",              limit: 255,                   null: false
@@ -34,6 +34,17 @@ ActiveRecord::Schema.define(version: 20180317120110) do
   end
 
   add_index "activities_users", ["activity_id", "user_id"], name: "index_activities_users_on_activity_id_and_user_id", using: :btree
+
+  create_table "article_types", force: :cascade do |t|
+    t.string   "name",              limit: 255
+    t.string   "code",              limit: 255
+    t.string   "thumb",             limit: 255
+    t.integer  "public_account_id", limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "article_types", ["public_account_id"], name: "index_article_types_on_public_account_id", using: :btree
 
   create_table "companies", force: :cascade do |t|
     t.string   "name",       limit: 255,                        null: false
@@ -67,6 +78,30 @@ ActiveRecord::Schema.define(version: 20180317120110) do
 
   add_index "events", ["event_type"], name: "index_events_on_event_type", using: :btree
   add_index "events", ["public_account_id"], name: "index_events_on_public_account_id", using: :btree
+
+  create_table "media_resources", force: :cascade do |t|
+    t.string   "name",              limit: 255
+    t.string   "qiniu_key",         limit: 255
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "public_account_id", limit: 4
+  end
+
+  add_index "media_resources", ["public_account_id"], name: "index_media_resources_on_public_account_id", using: :btree
+
+  create_table "pages", force: :cascade do |t|
+    t.string   "title",             limit: 255,                   null: false
+    t.string   "code",              limit: 30,                    null: false
+    t.text     "content",           limit: 65535,                 null: false
+    t.string   "page_type",         limit: 10,    default: "raw"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.integer  "public_account_id", limit: 4
+    t.integer  "article_type_id",   limit: 4
+  end
+
+  add_index "pages", ["article_type_id"], name: "index_pages_on_article_type_id", using: :btree
+  add_index "pages", ["public_account_id"], name: "index_pages_on_public_account_id", using: :btree
 
   create_table "public_accounts", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false

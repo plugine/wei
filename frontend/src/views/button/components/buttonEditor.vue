@@ -62,7 +62,7 @@
         <div class="editor-container">
           <el-form-item label-width="80px" label="模版代码:" class="postInfo-container-item">
           </el-form-item>
-            <codemirror ref="rubyEditor" :options="cmOptions" style="height: 800px" :height=800 v-model="postForm.template"></codemirror>
+          <codemirror ref="rubyEditor" :options="cmOptions" style="height: 800px" :height=800 v-model="postForm.template"></codemirror>
         </div>
       </div>
     </el-form>
@@ -71,33 +71,21 @@
 </template>
 
 <script>
-import Upload from '@/components/Upload/singleImage3'
-import MDinput from '@/components/MDinput'
-import Multiselect from 'vue-multiselect'// 使用的一个多选框组件，element-ui的select不能满足所有需求
-import 'vue-multiselect/dist/vue-multiselect.min.css'// 多选框组件css
-import Sticky from '@/components/Sticky' // 粘性header组件
-import { validateURL } from '@/utils/validate'
-import { createActivity } from '@/api/activity'
-import { fetchActivity, updateActivity } from '@/api/activity'
-import { fetchAccountList } from '@/api/account'
-import 'codemirror/mode/ruby/ruby.js'
+import { fetchAccountButton, createAccountButton } from '@/api/button'
+import 'codemirror/mode/javascript/javascript.js'
 import 'codemirror/theme/yeti.css'
 
 import { codemirror } from 'vue-codemirror'
 import 'codemirror/lib/codemirror.css'
 
 const defaultForm = {
-  name: '',
-  template: '',
-  desc: '',
-  qrurl: null,
-  author: '',
-  public_account_id: null
+  public_account_id: 0,
+  button_json: ''
 }
 
 export default {
-  name: 'activityEditor',
-  components: { MDinput, Upload, Multiselect, Sticky, codemirror },
+  name: 'buttonEditor',
+  components: { codemirror },
   props: {
     isEdit: {
       type: Boolean,
@@ -106,7 +94,7 @@ export default {
   },
   data() {
     return {
-      id: -1,
+      public_account_id: -1,
       value: '',
       postForm: Object.assign({}, defaultForm),
       fetchSuccess: true,
@@ -115,7 +103,7 @@ export default {
       cmOptions: {
         // codemirror options
         tabSize: 2,
-        mode: 'ruby',
+        mode: 'json',
         lineNumbers: true,
         line: true
       }
@@ -124,10 +112,9 @@ export default {
   computed: {
   },
   created() {
-
+    this.public_account_id = this.$route.params.id
     this.fetchList()
     if (this.isEdit) {
-      this.id = this.$route.params.id
       this.fetchData(this.id)
     } else {
       this.postForm = Object.assign({}, defaultForm)

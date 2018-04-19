@@ -4,9 +4,15 @@ class PublicAccount < ActiveRecord::Base
 
   has_many :users
   has_many :activities, dependent: :destroy
-  has_many :conditions, dependent: :destroy
+  has_one :account_button, dependent: :destroy
   belongs_to :company
 
+
+  # 创建自定义菜单
+  # 详细文档请见：https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421141013
+  def update_account_button
+    WechatService.instance.account_api(self.public_account).menu_create(JSON.parse(self.menu_json))
+  end
 
   def to_api_json
     {

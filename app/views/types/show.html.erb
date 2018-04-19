@@ -1,0 +1,12 @@
+<html>
+<body>
+<h1><%= @type.name %></h1>
+<% if @type.thumb %>
+  <img src="<%= @type.thumb %>">
+<% end %>
+
+<% @type.pages.each do |page| %>
+  <%= link_to page.title, show_page_url(page.code) %>
+<% end %>
+</body>
+</html>

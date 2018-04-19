@@ -159,6 +159,7 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (4.2.0)
+    netrc (0.11.0)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     pry (0.11.3)
@@ -174,6 +175,9 @@ GEM
       pry (>= 0.9.11)
     public_suffix (2.0.5)
     puma (3.11.3)
+    qiniu (6.9.0)
+      mime-types (~> 3.1)
+      rest-client (~> 2.0)
     rack (1.6.9)
     rack-cors (1.0.2)
     rack-protection (2.0.1)
@@ -211,6 +215,10 @@ GEM
     redis (3.3.5)
     redis-namespace (1.6.0)
       redis (>= 3.0.4)
+    rest-client (2.0.2)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
     ruby-progressbar (1.9.0)
     sass (3.5.5)
       sass-listen (~> 4.0.0)
@@ -301,6 +309,7 @@ DEPENDENCIES
   pry-rails
   pry-stack_explorer
   puma
+  qiniu (>= 6.9.0)
   rack-cors
   rails (= 4.2.6)
   redis
