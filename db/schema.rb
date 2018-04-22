@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180414120123) do
+ActiveRecord::Schema.define(version: 20180415100611) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "name",              limit: 255,                   null: false
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20180414120123) do
     t.integer  "public_account_id", limit: 4
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
+    t.string   "event_key",         limit: 255,   default: ""
   end
 
   add_index "activities", ["public_account_id"], name: "index_activities_on_public_account_id", using: :btree
@@ -104,13 +105,14 @@ ActiveRecord::Schema.define(version: 20180414120123) do
   add_index "pages", ["public_account_id"], name: "index_pages_on_public_account_id", using: :btree
 
   create_table "public_accounts", force: :cascade do |t|
-    t.string   "name",       limit: 255, null: false
-    t.string   "account",    limit: 255, null: false
-    t.string   "appid",      limit: 255, null: false
-    t.string   "appsecret",  limit: 255, null: false
+    t.string   "name",       limit: 255,   null: false
+    t.string   "account",    limit: 255,   null: false
+    t.string   "appid",      limit: 255,   null: false
+    t.string   "appsecret",  limit: 255,   null: false
     t.integer  "company_id", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "menu_json",  limit: 65535
   end
 
   create_table "users", force: :cascade do |t|

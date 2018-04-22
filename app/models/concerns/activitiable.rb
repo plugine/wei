@@ -25,7 +25,7 @@ module Activitiable
   def join_result
     @join_result
   end
-$redis.eval
+
   # 向当前用户发送文字
   def say(content)
     api.custom_message_send message.reply.text(content)

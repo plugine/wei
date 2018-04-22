@@ -1,1 +1,0 @@
-webpackJsonp([44],{Seyn:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r={name:"createForm",components:{AccountEditor:n("/s8l").default}},c={render:function(){var e=this.$createElement;return(this._self._c||e)("account-editor",{attrs:{"is-edit":!0}})},staticRenderFns:[]},s=n("VU/8")(r,c,!1,null,null,null);t.default=s.exports}});

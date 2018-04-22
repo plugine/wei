@@ -1,0 +1,50 @@
+<html>
+<head>
+  <title>Wei Panel</title>
+  <link href="https://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/codemirror/5.36.0/codemirror.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/codemirror/5.36.0/theme/dracula.min.css" rel="stylesheet">
+
+
+  <script src="https://cdn.bootcss.com/codemirror/5.36.0/codemirror.min.js"></script>
+  <script src="https://cdn.bootcss.com/codemirror/5.36.0/mode/ruby/ruby.min.js"></script>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+
+<div class="wei-container">
+  <ul class="wei-navigator">
+    <li class="slogen">
+        <h3>叶寒书网络科技</h3>
+    </li>
+    <li><a href="<%= admin_dash_boards_path %>"><span class="glyphicon glyphicon-home icon-sm"></span>控制面板</a></li>
+    <li><a href="<%= admin_activities_path %>"><span class="glyphicon glyphicon-flag icon-sm"></span>活动管理</a></li>
+    <li><a href="<%= admin_public_accounts_path %>"><span class="glyphicon glyphicon-th-large icon-sm"></span>公众号</a></li>
+    <li><a href="<%=  %>"><span class="glyphicon glyphicon-user icon-sm"></span>账户设置</a></li>
+  </ul>
+  <div class="wei-content">
+    <div class="wei-content-head">
+      <ul>
+        <% panel_menu.to_a.each do|href| %>
+        <li><%= href %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="wei-content-body">
+      <%= yield %>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script>
+    <% if flash[:alert] %>
+    alert("<%= flash[:alert] %>")
+    <% end  %>
+</script>
+</body>
+</html>

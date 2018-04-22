@@ -7,8 +7,4 @@ class CropUser < ActiveRecord::Base
 
   has_secure_password
 
-  def as_json
-    super.except('password_digest')
-  end
-
 end

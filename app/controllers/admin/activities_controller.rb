@@ -1,39 +1,71 @@
 module Admin
   class ActivitiesController < BaseController
+    before_action :set_activity, except: [:index, :new, :create]
 
     def index
-      render json: {code: 200, activities: Activity.all.map(&:to_api_json)}
+      @activities = Activity.all
+      respond_to do |format|
+        format.json { render json: {code: 200, activities: @activities.map(&:to_api_json)} }
+        format.html
+      end
+    end
+
+    def new
+      @activity = Activity.new
+      @accounts = current_user.company.public_accounts.all
+    end
+
+    def edit
+      @accounts = current_user.company.public_accounts.all
     end
 
     def create
       @activity = Activity.new activity_params
-      return render json: {code: 419, error: @activity.errors.to_s} unless @activity.save
-      render json: {code: 200}
+
+      respond_to do |format|
+        if @activity.save
+          format.json { render json: {code: 200} }
+          format.html { redirect_to admin_activities_path, alert: '创建成功' }
+        else
+          errors = @activity.errors.to_a.join '\n'
+          format.json { render json: {code: 419, error: errors} }
+          format.html { redirect_to :back, alert: errors }
+        end
+      end
     end
 
     def show
-      @activity = Activity.find(params[:id])
       render json: {code: 200, activity: @activity.to_api_json}
     end
 
     def destroy
-      @activity = Activity.find(params[:id])
       @activity.delete
       render json: {code: 200}
     end
 
     def update
-      @activity = Activity.find(params[:id])
       if @activity.update_attributes activity_params
-        return render json: {code: 200}
+        respond_to do |format|
+          format.json { render json: {code: 200} }
+          format.html { redirect_to :back, flash: {alert: '更新成功'} }
+        end
+      else
+        errors = @activity.errors.to_a.join '\n'
+        respond_to do |format|
+          format.json { render json: {code: 419, error: errors} }
+          format.html { redirect_to :back, flash: {alert: errors} }
+        end
       end
-      render json: {code: 419, error: @activity.errors.to_s}
     end
 
     private
 
     def activity_params
-      params.permit(:name, :author, :desc, :template, :public_account_id)
+      params.require(:activity).permit(:name, :author, :desc, :template, :public_account_id, :event_key)
+    end
+
+    def set_activity
+      @activity = Activity.find(params[:id])
     end
   end
 end

@@ -1,0 +1,42 @@
+
+
+<div class="panel panel-default" style="overflow: hidden">
+  <div class="panel-heading">
+    <h3 class="panel-title">基础参数</h3>
+  </div>
+  <div class="panel-body">
+    <label>
+      活动名：<input class="form-control" name="activity[name]" value="<%= @activity.name %>">
+    </label>
+
+    <label style="margin-left: 100px;">
+      作者：<input class="form-control" name="activity[author]" value="<%= @activity.author %>">
+    </label>
+    <div class="divider"></div>
+    <label>
+      事件标识：<input class="form-control" name="activity[event_key]" value="<%= @activity.event_key %>">
+    </label>
+    <label style="margin-left: 100px;">
+      部署公众号：
+      <select name="activity[public_account_id]" class="form-control">
+        <% @accounts.each do |a| %>
+        <option value="<%= a.id %>"><%= a.name %></option>
+        <% end %>
+      </select>
+    </label>
+    <% if @activity.qrurl %>
+      <%= image_tag @activity.qrurl, width: 64, height: 64, style: 'margin-left: 100px;' %>
+    <% end %>
+  </div>
+
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">代码</h3>
+  </div>
+  <div class="panel-body">
+    <textarea name="activity[template]" id="ruby-template" title="模版"><%= @activity.template %></textarea>
+  </div>
+
+</div>
+<button class="btn btn-primary" type="submit">提交</button>

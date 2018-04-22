@@ -1,1 +1,0 @@
-webpackJsonp([59],{qp82:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r={name:"createForm",components:{ActivityEditor:n("DlHa").default}},i={render:function(){var e=this.$createElement;return(this._self._c||e)("activity-editor",{attrs:{"is-edit":!0}})},staticRenderFns:[]},a=n("VU/8")(r,i,!1,null,null,null);t.default=a.exports}});

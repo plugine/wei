@@ -1,8 +1,11 @@
 Wei::Application.routes.draw do
   namespace :admin do
-    resource :login, only: [:create]
+    resources :logins, only: [:index, :create]
+
+    resources :panels, only: [:index]
     resources :public_accounts
     resources :dash_boards, only: [:index, :update]
+
     resources :activities
   end
 end

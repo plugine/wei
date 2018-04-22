@@ -1,0 +1,27 @@
+<html>
+<head>
+  <link href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<h1>登陆</h1>
+<form class="form form-control" method="post" action="/admin/logins">
+  <label>
+    用户名：
+    <input name="account" class="form-control" type="text">
+  </label>
+  <label>
+    密码：
+    <input name="password" class="form-control" type="password">
+  </label>
+  <button class="btn btn-primary" type="submit">提交</button>
+</form>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script>
+  <% if flash[:alert] %>
+  alert("<%= flash[:alert] %>")
+  <% end  %>
+</script>
+</body>
+</html>

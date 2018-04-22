@@ -1,7 +1,7 @@
 module Admin
   class BaseController < ApplicationController
-    protect_from_forgery with: :null_session
 
+    layout 'admin'
     before_action :allow_cross_domain_access
     before_action :cors_preflight_check
     after_action :cors_set_access_control_headers
@@ -38,8 +38,19 @@ module Admin
     end
 
     def set_current_user
+      if session[:user_id]
+        return CropUser.find session[:user_id]
+      end
+
       token = request.headers['Authentication']
       token ||=params[:Authentication]
+
+      # html render result call
+      respond_to do |format|
+        format.html { return redirect_to admin_logins_path }
+      end
+
+      # api call response handle
       unless token
         render json: {code: 403, error: '请先登陆', bicode: 10001}
       end

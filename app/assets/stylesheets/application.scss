@@ -1,0 +1,111 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require select2-bootstrap
+ */
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  background-color: #495060;
+}
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+a, span {
+  display: inline-block;
+  text-decoration: none;
+}
+a:hover { text-decoration: none; }
+
+ul {
+  list-style: none;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: #f1f1f1;
+}
+
+// ----------------Admin Page Layout----------------------
+.icon-sm {
+  float: left;
+  color: rgb(113, 214, 49);
+  font-size: 22px;
+  margin-top: -3px;
+}
+.wei-container {
+  width: 100%;
+  height: 100%;
+}
+
+.wei-navigator {
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  float: left;
+  background-color: #495060;
+
+  li {
+    height: 45px;
+  }
+
+  li > a {
+    width: 45%;
+    height: 100%;
+    color: #f0f0f0;
+  }
+
+  .slogen {
+    margin: 20px 0;
+    text-align: center;
+    h3 {
+      font-size: 18px;
+      color: white;
+
+    }
+  }
+}
+.wei-content {
+  background-color: white;
+  margin-left: 20%;
+  width: 80%;
+
+  .wei-content-head {
+    background-color: #584780;
+    ul {
+      padding: 14px;
+      overflow: hidden;
+      li {
+        float: left;
+        margin-right: 14px;
+        > a {
+          padding: 6px;
+          color: white;
+          background-color: #0a76a4;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+  .wei-content-body {
+    padding: 20px;
+  }
+}
+
+//---------------End Admin Page Layout--------------------

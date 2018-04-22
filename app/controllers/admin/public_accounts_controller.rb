@@ -1,41 +1,69 @@
 module Admin
 
   class PublicAccountsController < BaseController
-    before_action :set_account, except: [:index, :create]
+    before_action :set_account, except: [:index, :create, :new]
 
     def index
-      render json: {
-          code: 200,
-          public_accounts: @current_user.company.public_accounts.order_desc.map(&:to_api_json)
-      }
+      @accounts = @current_user.company.public_accounts.order_desc
+
+      respond_to do |format|
+        format.json {render json: {code: 200, public_accounts: @accounts.map(&:to_api_json) } }
+        format.html
+      end
+    end
+
+    def edit
+    end
+
+    def new
+      @account = PublicAccount.new
     end
 
     def show
-      render json: {code: 200, account: @account.to_api_json}
+      respond_to do |format|
+        format.json { render json: {code: 200, account: @account.to_api_json} }
+        format.html
+      end
     end
 
     def create
-      @company = current_user.company.public_accounts.new account_params
-      if @company.save
-        return render json: {code: 200}
+      @account = current_user.company.public_accounts.new account_params
+
+      respond_to do |format|
+        if @account.save
+          format.json { render json: {code: 200} }
+          format.html { redirect_to admin_public_accounts_path, alert: '创建成功' }
+        else
+          errors = @account.errors.to_a.join "\n"
+          format.json { render json: {code: 419, error: errors} }
+          format.html { redirect_to :back, alert: errors }
+        end
       end
-      render json: {code: 419, error: @company.errors.to_s}
     end
 
     def update
       updated = @account.update_attributes account_params
 
-      return render json: {code: 200, updated: updated} if updated
-      render json: {
-          code: 419,
-          error: @account.error_message,
-          bicode: 10004
-      }
+      respond_to do |format|
+        if updated
+          format.json { render json: {code: 200} }
+          format.html { redirect_to :back, alert: '更新成功' }
+        else
+          errors = @account.errors.to_a.join "\n"
+          format.json { render json: {code: 419, error: errors} }
+          format.html { redirect_to :back, alert: errors }
+        end
+      end
+
     end
 
     def destroy
       @account.delete
-      render json: { code: 200 }
+
+      respond_to do |format|
+        format.json { render json: {code: 200}}
+        format.html { redirect_to admin_public_accounts_path }
+      end
     end
 
 
@@ -47,7 +75,7 @@ module Admin
     end
 
     def account_params
-      params.permit(:name, :account, :appid, :appsecret)
+      params.require(:public_account).permit(:name, :account, :appid, :appsecret)
     end
 
   end

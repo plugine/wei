@@ -3,6 +3,8 @@ source 'https://gems.ruby-china.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
+
+gem 'jquery-rails'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.13', '< 0.5'
 # Use SCSS for stylesheets
@@ -15,6 +17,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'mini_magick'
+
+gem "select2-rails"
 
 gem 'jwt'
 
@@ -49,6 +53,8 @@ gem 'httparty'
 
 # for wechat endpoint
 gem 'wechat'
+
+gem 'simple_form'
 
 
 group :development, :test do

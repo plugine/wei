@@ -1,0 +1,11 @@
+
+<form class="form-group" method="post" action="<%= admin_activity_path(@activity) %>">
+  <input type="hidden" name="_method" value="put" />
+  <%= render 'activity' %>
+</form>
+<script>
+    CodeMirror.fromTextArea(document.getElementById("ruby-template"), {
+        lineNumbers: true,
+        mode: "ruby"
+    });
+</script>
