@@ -12,6 +12,14 @@ module Wei
     config.autoload_paths += Dir["#{config.root}/app/services/"]
     config.autoload_paths += Dir["#{config.root}/activities/"]
     config.autoload_paths += %W(#{config.root}/lib/)
+    config.assets.compile = true
+    config.assets.precompile = %w(*.js *.css *.css.erb)
+
+    if Rails.env == 'production'
+      config.default_host = 'weixin.njupt.org'
+    else
+      config.default_host = 'localhost'
+    end
 
 
 
