@@ -11,5 +11,7 @@
         @join_result = join_result
       end
 
-      text '欢迎参加这个活动啊'
+      def start 
+  say '欢迎参加活动'
+end
     end

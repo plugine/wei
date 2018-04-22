@@ -15,6 +15,4 @@
   say "hello you are in activity, you result is #{join_result}"
   say "welcome to my homeland!"
 end
-
-puts 1
     end
