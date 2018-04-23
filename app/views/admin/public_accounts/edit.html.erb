@@ -3,3 +3,9 @@
   <input type="hidden" name="_method" value="put" />
   <%= render 'account' %>
 </form>
+<script>
+    CodeMirror.fromTextArea(document.getElementById("json-template"), {
+        lineNumbers: true,
+        mode: "javascript"
+    });
+</script>

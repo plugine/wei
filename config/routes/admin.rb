@@ -7,5 +7,7 @@ Wei::Application.routes.draw do
     resources :dash_boards, only: [:index, :update]
 
     resources :activities
+
+    resources :buttons
   end
 end

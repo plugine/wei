@@ -2,3 +2,9 @@
 <form class="form-group" method="post" action="<%= admin_public_accounts_path %>">
   <%= render 'account' %>
 </form>
+<script>
+    CodeMirror.fromTextArea(document.getElementById("json-template"), {
+        lineNumbers: true,
+        mode: "javascript"
+    });
+</script>

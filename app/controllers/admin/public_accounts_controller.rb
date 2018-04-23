@@ -43,6 +43,7 @@ module Admin
 
     def update
       updated = @account.update_attributes account_params
+      logger.info "result: #{@account.update_account_button}"
 
       respond_to do |format|
         if updated
@@ -75,7 +76,7 @@ module Admin
     end
 
     def account_params
-      params.require(:public_account).permit(:name, :account, :appid, :appsecret)
+      params.require(:public_account).permit(:name, :account, :appid, :appsecret, :menu_json)
     end
 
   end
