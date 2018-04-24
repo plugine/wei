@@ -6,6 +6,10 @@ Wei::Application.routes.draw do
     resources :public_accounts
     resources :dash_boards, only: [:index, :update]
 
+    resources :pages do
+      get :account_pages, on: :collection
+    end
+
     resources :activities
 
     resources :buttons

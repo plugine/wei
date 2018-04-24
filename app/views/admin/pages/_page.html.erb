@@ -1,0 +1,31 @@
+<div class="panel panel-default" style="overflow: hidden">
+  <div class="panel-heading">
+    <h3 class="panel-title">文章</h3>
+  </div>
+  <div class="panel-body">
+    <label>
+      标题：<input class="form-control" name="page[title]" value="<%= @page.title %>">
+    </label>
+    <label style="margin-left: 100px;">
+      标识：<input class="form-control" name="page[code]" value="<%= @page.code %>">
+    </label>
+    <label style="margin-left: 100px;">
+      类型：
+      <select name="page[type]" class="form-control">
+          <option value="raw" <%= 'selected' if @page.type == 'raw' %>>全文渲染</option>
+          <option value="article" <%= 'selected' if @page.type == 'article' %>>文章</option>
+      </select>
+    </label>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">HTML</h3>
+  </div>
+  <div class="panel-body">
+    <textarea name="page[content]" id="html-template" title="模版"><%= @page.content %></textarea>
+  </div>
+
+</div>
+<button type="submit" class="btn btn-primary">提交</button>

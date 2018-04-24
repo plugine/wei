@@ -4,8 +4,9 @@
   <%= render 'account' %>
 </form>
 <script>
-    CodeMirror.fromTextArea(document.getElementById("json-template"), {
+    var editor = CodeMirror.fromTextArea(document.getElementById("json-template"), {
         lineNumbers: true,
         mode: "javascript"
     });
+    editor.setSize('auto','800px');
 </script>

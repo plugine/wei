@@ -5,6 +5,7 @@ class PublicAccount < ActiveRecord::Base
   has_many :users
   has_many :activities, dependent: :destroy
   has_one :account_button, dependent: :destroy
+  has_many :pages
   belongs_to :company
 
   # 创建自定义菜单

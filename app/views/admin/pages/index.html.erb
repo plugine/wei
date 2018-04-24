@@ -1,0 +1,24 @@
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>公众号名称</th>
+    <th>公众号账户</th>
+    <th>页面数量</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @accounts.each do |account| %>
+    <tr>
+      <td><%= account.id %></td>
+      <td><%= account.name %></td>
+      <td><%= account.account %></td>
+      <td><%= account.pages.count %></td>
+      <td>
+        <%= link_to "详情", account_pages_admin_pages_path(public_account_id: account.id), class: "btn btn-primary" %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,30 @@
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>名称</th>
+    <th>代码</th>
+    <th>类型</th>
+    <th>所属账号</th>
+    <th>创建时间</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @pages.each do |page| %>
+    <tr>
+      <td><%= page.id %></td>
+      <td><%= page.title %></td>
+      <td><%= page.code %></td>
+      <td><%= page.page_type %></td>
+      <td><%= page.public_account.name %></td>
+      <td><%= page.created_at %></td>
+      <td>
+        <%= link_to "预览", show_page_path(code: page.code), class: "btn btn-success" %>
+        <%= link_to "编辑", edit_admin_page_path(page), class: "btn btn-primary" %>
+        <%= link_to "删除", admin_page_path(page), method: :delete, data: { confirm: '确认删除吗？' }, class: "btn btn-danger" %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

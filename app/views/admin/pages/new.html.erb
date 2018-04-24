@@ -1,0 +1,11 @@
+
+<form class="form-group" method="post" action="<%= admin_pages_path %>">
+  <%= render 'page' %>
+</form>
+<script>
+    var editor = CodeMirror.fromTextArea(document.getElementById("html-template"), {
+        lineNumbers: true,
+        mode: "html"
+    });
+    editor.setSize('auto','800px');
+</script>

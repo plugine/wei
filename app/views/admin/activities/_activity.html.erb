@@ -20,7 +20,7 @@
       部署公众号：
       <select name="activity[public_account_id]" class="form-control">
         <% @accounts.each do |a| %>
-        <option value="<%= a.id %>"><%= a.name %></option>
+        <option value="<%= a.id %>" <%= 'selected' if activity.public_account_id == a.id %>><%= a.name %></option>
         <% end %>
       </select>
     </label>

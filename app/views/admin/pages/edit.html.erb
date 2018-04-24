@@ -1,0 +1,12 @@
+
+<form class="form-group" method="post" action="<%= admin_page_path(@page) %>">
+  <input type="hidden" name="_method" value="put" />
+  <%= render 'page' %>
+</form>
+<script>
+    var editor = CodeMirror.fromTextArea(document.getElementById("html-template"), {
+        lineNumbers: true,
+        mode: "html"
+    });
+    editor.setSize('auto','800px');
+</script>

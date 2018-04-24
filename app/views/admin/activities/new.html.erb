@@ -3,8 +3,9 @@
   <%= render 'activity' %>
 </form>
 <script>
-    CodeMirror.fromTextArea(document.getElementById("ruby-template"), {
+    var editor = CodeMirror.fromTextArea(document.getElementById("ruby-template"), {
         lineNumbers: true,
         mode: "ruby"
     });
+    editor.setSize('auto','800px');
 </script>
