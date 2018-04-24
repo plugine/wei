@@ -7,7 +7,15 @@ module Activitiable
         when :start
           instance_eval { define_method :start, -> {block.call *args} }
         else
-          instance_eval { define_method(name) {|value| self.instance_eval(%("#{value}")) } }
+          instance_eval do
+            define_method(name) do |str=nil|
+              @_strings = {}
+              if str
+                  @_strings[name] = %("#{args.first}")
+              end
+              @_strings[name]
+            end
+          end
       end
     end
   end

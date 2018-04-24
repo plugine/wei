@@ -18,9 +18,11 @@ class Activity < ActiveRecord::Base
   end
 
   def refresh_activity_qr
-    api = WechatService.instance.account_api public_account
-    ticket = (api.qrcode_create_limit_scene "base_#{self.id}")['ticket']
-    update qrurl: "#{TICKET_BASE}#{ticket}"
+    if public_account_id_change?
+      api = WechatService.instance.account_api public_account
+      ticket = (api.qrcode_create_limit_scene "base_#{self.id}")['ticket']
+      update qrurl: "#{TICKET_BASE}#{ticket}"
+    end
   end
 
   def to_api_json

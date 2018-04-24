@@ -3,6 +3,7 @@
   <tr>
     <th>ID</th>
     <th>名称</th>
+    <th>所属公众号</th>
     <th>事件</th>
     <th>创建时间</th>
     <th>二维码</th>
@@ -14,9 +15,10 @@
   <tr>
     <td><%= a.id %></td>
     <td><%= a.name %></td>
+    <td><%= a.public_account.name %></td>
     <td><%= a.event_key %></td>
     <td><%= a.created_at %></td>
-    <td><%= image_tag(a.qrurl, width: 64, height: 64) if a.qrurl %></td>
+    <td><%= image_tag(a.qrurl, width: 96, height: 96) if a.qrurl %></td>
     <td>
       <%= link_to "编辑", edit_admin_activity_path(a), class: "btn btn-success" %>
       <%= link_to "删除", admin_activity_path(a), method: :delete, data: { confirm: '确认删除吗？' }, class: "btn btn-danger" %>
