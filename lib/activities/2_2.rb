@@ -11,8 +11,9 @@
         @join_result = join_result
       end
 
-      def start
-  say "hello you are in activity, you result is #{join_result}"
-  say "welcome to my homeland!"
+      text :welcome, 'Hi #{user.nickname}~\n欢迎参加我的活动'
+
+def start
+  say welcome
 end
     end

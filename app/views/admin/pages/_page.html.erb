@@ -11,9 +11,9 @@
     </label>
     <label style="margin-left: 100px;">
       类型：
-      <select name="page[type]" class="form-control">
-          <option value="raw" <%= 'selected' if @page.type == 'raw' %>>全文渲染</option>
-          <option value="article" <%= 'selected' if @page.type == 'article' %>>文章</option>
+      <select name="page[page_type]" class="form-control">
+          <option value="raw" <%= 'selected' if @page.page_type == 'raw' %>>全文渲染</option>
+          <option value="article" <%= 'selected' if @page.page_type == 'article' %>>文章</option>
       </select>
     </label>
   </div>

@@ -1,9 +1,9 @@
 
-<form class="form-group" method="post" action="<%= admin_pages_path %>">
+<form class="form-group" method="post" action="<%= admin_pages_path(public_account_id: @account.id) %>">
   <%= render 'page' %>
 </form>
 <script>
-    var editor = CodeMirror.fromTextArea(document.getElementById("html-template"), {
+    const editor = CodeMirror.fromTextArea(document.getElementById("html-template"), {
         lineNumbers: true,
         mode: "html"
     });

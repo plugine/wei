@@ -1,6 +1,16 @@
 module Activitiable
   extend ActiveSupport::Concern
 
+  module ClassMethods
+    def method_missing(name, *args, &block)
+      case name
+        when :start
+          define_method :start, -> {block.call *args}
+        else
+          define_method name, -> { self.instance_eval(%("#{args.first}")) }
+      end
+    end
+  end
 
   def user
     @user

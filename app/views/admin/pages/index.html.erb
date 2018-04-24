@@ -17,6 +17,7 @@
       <td><%= account.pages.count %></td>
       <td>
         <%= link_to "详情", account_pages_admin_pages_path(public_account_id: account.id), class: "btn btn-primary" %>
+        <%= link_to "新建", new_admin_page_path(public_account_id: account.id), class: "btn btn-success" %>
       </td>
     </tr>
   <% end %>

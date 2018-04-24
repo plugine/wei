@@ -21,6 +21,12 @@ module ApplicationHelper
     ]
   end
 
+  def pages_menu
+    [
+        (link_to '公众号列表', admin_pages_path)
+    ]
+  end
+
   def crop_users_menu
 
   end
