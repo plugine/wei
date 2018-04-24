@@ -5,9 +5,9 @@ module Activitiable
     def method_missing(name, *args, &block)
       case name
         when :start
-          define_method :start, -> {block.call *args}
+          instance_eval { define_method :start, -> {block.call *args} }
         else
-          define_method name, -> { self.instance_eval(%("#{args.first}")) }
+          instance_eval { define_method(name) {|value| self.instance_eval(%("#{value}")) } }
       end
     end
   end
