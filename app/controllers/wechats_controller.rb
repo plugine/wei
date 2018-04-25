@@ -35,6 +35,11 @@ class WechatsController < ApplicationController
           handle_join_activity @message[:FromUserName], event_key
         end
       end
+
+      if event == 'CLICK'
+
+      end
+
     end
     # 统一使用客服消息进行回复
     render text: ''
