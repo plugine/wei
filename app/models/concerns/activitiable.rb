@@ -118,7 +118,7 @@ module Activitiable
   private
 
   def get_relaied_user
-    user_id = user.realied_user_id(activity.id)
+    user_id = user.relaied_user_id(activity.id)
     user_id == 0 ? nil : User.find(user_id)
   end
 end
