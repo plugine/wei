@@ -8,8 +8,6 @@ class Activity < ActiveRecord::Base
 
   after_commit :refresh_template, on: [:create, :update]
 
-  after_create :refresh_activity_qr
-
   validates_presence_of :name, :public_account_id
 
   def refresh_template
@@ -18,11 +16,9 @@ class Activity < ActiveRecord::Base
   end
 
   def refresh_activity_qr
-    if public_account_id_change?
-      api = WechatService.instance.account_api public_account
-      ticket = (api.qrcode_create_limit_scene "base_#{self.id}")['ticket']
-      update qrurl: "#{TICKET_BASE}#{ticket}"
-    end
+    api = WechatService.instance.account_api public_account
+    ticket = (api.qrcode_create_limit_scene "base_#{self.id}")['ticket']
+    update qrurl: "#{TICKET_BASE}#{ticket}"
   end
 
   def to_api_json
@@ -73,6 +69,6 @@ END_OF_PREPARE
   end
 
   def filename
-    "#{Rails.root}/lib/activities/#{public_account_id}_#{id}.rb"
+    "#{Rails.root}/tmp/activities/#{public_account_id}_#{id}.rb"
   end
 end

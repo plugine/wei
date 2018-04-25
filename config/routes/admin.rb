@@ -10,7 +10,9 @@ Wei::Application.routes.draw do
       get :account_pages, on: :collection
     end
 
-    resources :activities
+    resources :activities do
+      get :refresh_qr, on: :collection
+    end
 
     resources :buttons
   end

@@ -12,6 +12,13 @@
     <label style="margin-left: 100px;">
       作者：<input class="form-control" name="activity[author]" value="<%= @activity.author %>">
     </label>
+
+    <% if @activity.qrurl %>
+    <label style="margin-left: 100px;">
+      <%= link_to '刷新二维码', refresh_qr_admin_activities_path, class: 'btn btn-success' %>
+    </label>
+    <% end %>
+
     <div class="divider"></div>
     <label>
       事件标识：<input class="form-control" name="activity[event_key]" value="<%= @activity.event_key %>">

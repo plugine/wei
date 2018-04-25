@@ -34,6 +34,11 @@ module Admin
       end
     end
 
+    def refresh_qr
+      @activity.refresh_activity_qr
+      redirect_to :back
+    end
+
     def show
       render json: {code: 200, activity: @activity.to_api_json}
     end

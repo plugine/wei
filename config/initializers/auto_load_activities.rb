@@ -1,4 +1,7 @@
-(Dir.glob "#{Rails.root}/lib/activities/**/*").each do |file|
+dir = "#{Rails.root}/tmp/activities/"
+
+Dir.mkdir(dir) unless Dir.exist?(dir)
+(Dir.glob "#{dir}/**/*").each do |file|
   begin
     load file
   rescue Exception => e

@@ -10,5 +10,6 @@ Wei::Application.routes.draw do
   mount Sidekiq::Web => '/admin/sidekiq'
 
   resources :pages, only: [:show], param: :code
+  resources :storages, param: :key
   resources :types, only: [:show], param: :code
 end
