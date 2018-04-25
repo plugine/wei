@@ -15,7 +15,7 @@
 
     <% if @activity.qrurl %>
     <label style="margin-left: 100px;">
-      <%= link_to '刷新二维码', refresh_qr_admin_activities_path, class: 'btn btn-success' %>
+      <%= link_to '刷新二维码', refresh_qr_admin_activity_path(id: @activity.id), class: 'btn btn-success' %>
     </label>
     <% end %>
 

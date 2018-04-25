@@ -33,7 +33,7 @@ set :pty, false
 set :rbenv_map_bins, %w{rake gem bundle ruby rails sidekiq sidekiqctl}
 
 # Default value for linked_dirs is []
-set :linked_dirs, %w(log tmp/pids tmp/cache tmp/sockets public/assets public/uploads db/exports)
+set :linked_dirs, %w(log tmp/activities tmp/pids tmp/cache tmp/sockets public/assets public/uploads db/exports)
 
 set(:custom_links, [
     {

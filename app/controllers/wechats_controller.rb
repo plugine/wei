@@ -25,7 +25,7 @@ class WechatsController < ApplicationController
       event = @message[:Event]
       event_key = @message[:EventKey].gsub /qrscene_/, ''
 
-      logger.info "event: #{@message[:MsgType]},  event_key: #{@message[:EventKey]}"
+      logger.info "event: #{@message[:event]},  event_key: #{@message[:EventKey]}"
 
       if event == 'subscribe' || event == 'SCAN'
         if event_key.blank?
@@ -37,7 +37,7 @@ class WechatsController < ApplicationController
       end
 
       if event == 'CLICK'
-
+        handle_join_activity @message[:FromUserName], event_key
       end
 
     end
@@ -66,7 +66,7 @@ class WechatsController < ApplicationController
   # acti_#{activity_id}_#{user_id}
   def handle_join_activity(openid, event_key)
     event_map = event_key.split '_'
-    if event_map[0] == 'base'
+    if event_map[0] == 'base' || event_map[0] == 'btn'
       # 参加活动
       activity_id = event_map[1].to_i
       join_activity(openid, activity_id, @account.id, base: true)

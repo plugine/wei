@@ -11,7 +11,7 @@ Wei::Application.routes.draw do
     end
 
     resources :activities do
-      get :refresh_qr, on: :collection
+      get :refresh_qr, on: :member
     end
 
     resources :buttons
