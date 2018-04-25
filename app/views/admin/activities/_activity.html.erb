@@ -13,7 +13,7 @@
       作者：<input class="form-control" name="activity[author]" value="<%= @activity.author %>">
     </label>
 
-    <% if @activity.qrurl %>
+    <% if @activity.id %>
     <label style="margin-left: 100px;">
       <%= link_to '刷新二维码', refresh_qr_admin_activity_path(id: @activity.id), class: 'btn btn-success' %>
     </label>

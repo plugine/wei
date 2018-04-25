@@ -20,8 +20,8 @@ frontend/node_modules
 /db/exports/
 /db/tmp/*
 /public/assets
-/public/system
-/public/house
+/public/upload
+/public/uploads
 /spec/tmp/*
 **.orig
 tags

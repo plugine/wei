@@ -3,7 +3,7 @@ module Activitiable
 
   module ClassMethods
     def method_missing(name, *args, &block)
-      define_method name , ->{self.instance_eval(%("#{args.first}")) }
+      define_method name , ->{self.instance_eval(%(%Q{#{args.first}})) }
     end
   end
 
@@ -29,6 +29,23 @@ module Activitiable
 
   def join_result
     @join_result
+  end
+
+  #--------------用户状态------------
+  def join_success?
+    @join_result == ErrorConst::JOIN_SUCCESS
+  end
+
+  def relay_self?
+    @join_result == ErrorConst::USER_RELAY_SELF
+  end
+
+  def relaied?
+    @join_result == ErrorConst::USER_RELAIED
+  end
+
+  def joined?
+    @join_result == ErrorConst::JOINED
   end
 
   # 向当前用户发送文字
@@ -101,7 +118,7 @@ module Activitiable
   private
 
   def get_relaied_user
-    user_id = user.relied_user_id(activity.id)
+    user_id = user.realied_user_id(activity.id)
     user_id == 0 ? nil : User.find(user_id)
   end
 end

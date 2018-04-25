@@ -6,7 +6,7 @@ module Userable
     Rails.logger.info "act_id: #{activity_id}, base: #{base}, base_user_id: #{base_user_id}, self.id: #{self.id}"
     if self.joined_activity? activity_id
       return ErrorConst::JOINED if base
-      if relied_user_id(activity_id) == 0
+      if relaied_user_id(activity_id) == 0
         return ErrorConst::USER_RELAY_SELF if base_user_id == self.id
         return relay(activity_id, base_user_id)
       end
@@ -59,7 +59,7 @@ module Userable
   end
 
   # 当前接力的用户的ID，如果没有上家，返回0
-  def relied_user_id(activity_id)
+  def relaied_user_id(activity_id)
     score = ($redis.zscore joined_list_key(activity_id), self.id)
     score.to_i
   end
