@@ -30,6 +30,8 @@ class WechatsController < ApplicationController
       if event == 'subscribe' || event == 'SCAN'
         if event_key.blank?
           # TODO 激活关注事件
+          user = User.find_by_openid openid
+          user ||= User.create_from_hash(@account.id, @api.user(openid))
         else
           # 活动事件处理
           handle_join_activity @message[:FromUserName], event_key
