@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180415100611) do
+ActiveRecord::Schema.define(version: 20180427160606) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "name",              limit: 255,                   null: false
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 20180415100611) do
     t.boolean  "alive"
     t.datetime "died_at"
     t.string   "openid",            limit: 255
-    t.string   "nickname",          limit: 255
+    t.string   "nickname",          limit: 191
     t.integer  "sex",               limit: 4
     t.string   "country",           limit: 255
     t.string   "province",          limit: 255
