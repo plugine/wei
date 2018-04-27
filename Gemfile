@@ -22,6 +22,8 @@ gem "select2-rails"
 
 gem 'jwt'
 
+gem 'will_paginate'
+
 gem 'rack-cors', :require => 'rack/cors'
 
 # using puma as default server

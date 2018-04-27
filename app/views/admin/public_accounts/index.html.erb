@@ -16,6 +16,7 @@
     <td><%= account.appid %></td>
     <td><%= account.created_at %></td>
     <td>
+      <%= link_to "用户管理", admin_users_path(public_account_id: account.id), class: 'btn btn-link' %>
       <%= link_to "编辑", edit_admin_public_account_path(account), class: "btn btn-success" %>
       <%= link_to "删除", admin_public_account_path(account), method: :delete, data: { confirm: '确认删除吗？' }, class: "btn btn-danger" %>
     </td>

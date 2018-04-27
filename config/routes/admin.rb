@@ -14,6 +14,8 @@ Wei::Application.routes.draw do
       get :refresh_qr, on: :member
     end
 
+    resources :users
+
     resources :buttons
   end
 end

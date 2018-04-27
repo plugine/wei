@@ -1,0 +1,22 @@
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>头像</th>
+    <th>OPENID</th>
+    <th>昵称</th>
+    <th>加入时间</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+  <tr>
+    <td><%= image_tag user.headimgurl, width: 80, height: 80, class: 'user-avatar' %></td>
+    <td><%= user.openid %></td>
+    <td><%= user.nickname %></td>
+    <td><%= user.created_at %></td>
+    <td></td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
