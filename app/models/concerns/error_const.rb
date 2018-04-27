@@ -5,6 +5,9 @@ module ErrorConst
   # 不能接力自己
   USER_RELAY_SELF = -2
 
+  # 接力成功
+  SUPPORT_SUCCESS = 0
+
   # 成功
   JOIN_SUCCESS = 1
 

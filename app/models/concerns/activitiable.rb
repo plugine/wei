@@ -36,6 +36,10 @@ module Activitiable
     @join_result == ErrorConst::JOIN_SUCCESS
   end
 
+  def support_success?
+    @join_result == ErrorConst::SUPPORT_SUCCESS
+  end
+
   def relay_self?
     @join_result == ErrorConst::USER_RELAY_SELF
   end

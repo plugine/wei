@@ -35,7 +35,8 @@ module Userable
       ($redis.zincrby rank_list_key(activity_id), 1, base_user_id) unless base
     end
 
-    ErrorConst::JOIN_SUCCESS
+    return ErrorConst::JOIN_SUCCESS if base
+    ErrorConst::SUPPORT_SUCCESS
   end
 
   # 判断用户是否加入一个活动，加入了返回true，未加入返回false

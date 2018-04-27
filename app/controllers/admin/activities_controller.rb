@@ -44,8 +44,11 @@ module Admin
     end
 
     def destroy
-      @activity.delete
-      render json: {code: 200}
+      @activity.destroy
+      respond_to do |format|
+        format.json { render json: {code: 200} }
+        format.html { redirect_to :back }
+      end
     end
 
     def update
