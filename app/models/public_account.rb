@@ -1,5 +1,10 @@
 class PublicAccount < ActiveRecord::Base
 
+  after_commit do
+    Rails.cache.delete PublicAccount.cache_ket(self.id)
+    Rails.cache.delete PublicAccount.cache_ket(self.account)
+  end
+
   scope :order_desc ,->{ order(id: :desc) }
 
   has_many :users
@@ -28,5 +33,17 @@ class PublicAccount < ActiveRecord::Base
             name: company.name
         }
     }
+  end
+
+  def self.fetch(id)
+    Rails.cache.fetch(cache_key(id)) {self.find(id)}
+  end
+
+  def self.fetch_by_account(account)
+    Rails.cache.fetch(cache_key(account)) {self.find_by_account(account)}
+  end
+
+  def self.cache_ket(res)
+    "account:#{res}"
   end
 end

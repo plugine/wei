@@ -2,6 +2,8 @@ class Activity < ActiveRecord::Base
   TICKET_BASE = 'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket='
   QINIU_BASE = 'http://searchnerd.qiniudn.com/'
 
+  after_commit { Rails.cache.delete Activity.cache_key(self.id) }
+
   belongs_to :public_account
 
   has_and_belongs_to_many :users
@@ -45,6 +47,14 @@ class Activity < ActiveRecord::Base
 
   def load_activity
     load filename
+  end
+
+  def self.fetch(id)
+    Rails.cache.fetch(cache_key(id)) { self.find(id) }
+  end
+
+  def cache_key(id)
+    "activity:#{id}"
   end
 
   private

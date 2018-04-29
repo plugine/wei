@@ -11,7 +11,7 @@ class WechatsController < ApplicationController
   def create
     return (head :unauthorized) unless verify_signature
     @openid = @message[:FromUserName]
-    @account = PublicAccount.find_by_account @message[:ToUserName]
+    @account = PublicAccount.fetch_by_account @message[:ToUserName]
 
     @api = WechatService.instance.account_api @account
 
@@ -63,7 +63,6 @@ class WechatsController < ApplicationController
   def set_message
     @message_text = request.raw_post
     @message = Wechat::Message.from_hash(Hash.from_xml(@message_text)['xml'].symbolize_keys)
-    logger.info "message_raw: #{@message_text}"
   end
 
 
@@ -94,7 +93,6 @@ class WechatsController < ApplicationController
     logger.info "message_text: #{@message_text}"
 
     ActivityJoinWorker.perform_async activity_id, user.id, account_id, @message_text, join_result
-    # ActivityJoinWorker.perform_async activity_id, user.id, account_id, @message, join_result
   end
 
 
