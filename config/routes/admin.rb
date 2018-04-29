@@ -17,5 +17,7 @@ Wei::Application.routes.draw do
     resources :users
 
     resources :buttons
+
+    resource :crop_users
   end
 end

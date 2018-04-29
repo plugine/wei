@@ -1,9 +1,9 @@
-<table class="table table-bordered">
+<table class="table table-striped">
   <thead>
   <tr>
     <th>头像</th>
-    <th>OPENID</th>
     <th>昵称</th>
+    <th>状态</th>
     <th>加入时间</th>
     <th>操作</th>
   </tr>
@@ -12,8 +12,8 @@
   <% @users.each do |user| %>
   <tr>
     <td><%= image_tag user.headimgurl, width: 80, height: 80, class: 'user-avatar' %></td>
-    <td><%= user.openid %></td>
     <td><%= user.nickname %></td>
+    <td><span class="alive-<%= user.alive %>"><%= user.alive ? '关注中' : '已取关' %></span></td>
     <td><%= user.created_at %></td>
     <td></td>
   </tr>

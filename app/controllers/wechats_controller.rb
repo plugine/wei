@@ -1,7 +1,3 @@
-
-
-# frozen_string_literal: true
-
 class WechatsController < ApplicationController
 
   before_action :set_message, only: :create
@@ -14,12 +10,11 @@ class WechatsController < ApplicationController
   # 微信消息入口
   def create
     return (head :unauthorized) unless verify_signature
+    @openid = @message[:FromUserName]
     @account = PublicAccount.find_by_account @message[:ToUserName]
 
     @api = WechatService.instance.account_api @account
 
-    logger.info request.body.read
-    logger.info @message.to_json
     if @message[:MsgType] == 'event'
       # 事件消息
       event = @message[:Event]
@@ -27,22 +22,28 @@ class WechatsController < ApplicationController
 
       logger.info "event: #{@message[:event]},  event_key: #{@message[:EventKey]}"
 
+      if event == 'unsubscribe'
+        # 取关
+        user = User.find_by_openid @openid
+        user.update alive: false, dead_at: DateTime.now if user
+      end
+
       if event == 'subscribe' || event == 'SCAN'
         if event_key.blank?
-          # TODO 激活关注事件
-          user = User.find_by_openid openid
+          user = User.find_by_openid @openid
           user ||= User.create_from_hash(@account.id, @api.user(openid))
         else
           # 活动事件处理
-          handle_join_activity @message[:FromUserName], event_key
+          handle_join_activity @openid, event_key
         end
       end
 
       if event == 'CLICK'
-        handle_join_activity @message[:FromUserName], event_key
+        handle_join_activity @openid, event_key
       end
 
     end
+
     # 统一使用客服消息进行回复
     render text: ''
   end
@@ -60,7 +61,9 @@ class WechatsController < ApplicationController
   end
 
   def set_message
-    @message = Wechat::Message.from_hash(Hash.from_xml(request.raw_post)['xml'].symbolize_keys)
+    @message_text = request.raw_post
+    @message = Wechat::Message.from_hash(Hash.from_xml(@message_text)['xml'].symbolize_keys)
+    logger.info "message_raw: #{@message_text}"
   end
 
 
@@ -88,8 +91,10 @@ class WechatsController < ApplicationController
     user ||= User.create_from_hash(account_id, @api.user(openid))
 
     join_result = user.join_activity(activity_id, base: base, base_user_id: base_user_id)
-    activity = "Activity#{activity_id}".constantize.new Activity.find(activity_id), user, @api, @account, @message, join_result
-    activity.start
+    logger.info "message_text: #{@message_text}"
+
+    ActivityJoinWorker.perform_async activity_id, user.id, account_id, @message_text, join_result
+    # ActivityJoinWorker.perform_async activity_id, user.id, account_id, @message, join_result
   end
 
 

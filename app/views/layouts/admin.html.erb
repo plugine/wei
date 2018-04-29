@@ -16,28 +16,31 @@
 </head>
 
 <body>
-
-<div class="wei-container">
-  <ul class="wei-navigator">
-    <li class="slogen">
+<div id="wrapper" class="toggled">
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
         <h3>叶寒书网络科技</h3>
-    </li>
-    <li><a href="<%= admin_dash_boards_path %>"><span class="glyphicon glyphicon-home icon-sm"></span>控制面板</a></li>
-    <li><a href="<%= admin_activities_path %>"><span class="glyphicon glyphicon-flag icon-sm"></span>活动管理</a></li>
-    <li><a href="<%= admin_public_accounts_path %>"><span class="glyphicon glyphicon-th-large icon-sm"></span>公众号</a></li>
-    <li><a href="<%= admin_pages_path %>"><span class="glyphicon glyphicon-file icon-sm"></span>页面管理</a></li>
-    <li><a href="<%=  %>"><span class="glyphicon glyphicon-user icon-sm"></span>账户设置</a></li>
-  </ul>
-  <div class="wei-content">
-    <div class="wei-content-head">
-      <ul>
-        <% panel_menu.to_a.each do|href| %>
-        <li><%= href %></li>
-        <% end %>
-      </ul>
-    </div>
-    <div class="wei-content-body">
-      <%= yield %>
+      </li>
+      <li><a href="<%= admin_dash_boards_path %>">控制面板</a></li>
+      <li><a href="<%= admin_activities_path %>">活动管理</a></li>
+      <li><a href="<%= admin_public_accounts_path %>">公众号</a></li>
+      <li><a href="<%= admin_pages_path %>">页面管理</a></li>
+      <li><a href="<%= admin_crop_users_path %>">账户设置</a></li>
+    </ul>
+  </div>
+  <div id="page-content-wrapper">
+    <div class="container-fluid">
+      <div class="wei-content-head">
+        <ul>
+          <% panel_menu.to_a.each do|href| %>
+            <li><%= href %></li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="wei-content-body">
+        <%= yield %>
+      </div>
     </div>
   </div>
 </div>

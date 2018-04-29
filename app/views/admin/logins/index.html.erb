@@ -1,21 +1,53 @@
 <html>
 <head>
   <link href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: PingFang SC,Microsoft YaHei,-apple-system,BlinkMacSystemFont,Helvetica Neue,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
+      background-size:contain;
+      background:url("http://static.njupt.org/login_background.jpg") 0 0 no-repeat scroll transparent;background-size:100% 100%;
+      text-align: center;
+      padding-top: 15%;
+    }
+    h1 {
+      color: white;
+      text-shadow:5px 2px 6px #000;
+    }
+      form {
+        border: none !important;
+        background: none !important;
+      }
+      label:first-child {
+        margin-top: 30px;
+      }
+      .copyright {
+        color: white;
+        font-size: 12px;
+        position: fixed;
+        bottom: 20px;
+        width: 100%;
+        text-align: center;
+      }
+  </style>
 </head>
 <body>
-<h1>登陆</h1>
+<h1>乐Cloud</h1>
 <form class="form form-control" method="post" action="/admin/logins">
   <label>
-    用户名：
-    <input name="account" class="form-control" type="text">
+    <input name="account" class="form-control" type="text" placeholder="用户名">
   </label>
+  <br/>
   <label>
-    密码：
-    <input name="password" class="form-control" type="password">
+    <input name="password" class="form-control" type="password" placeholder="密码">
   </label>
-  <button class="btn btn-primary" type="submit">提交</button>
+  <br/>
+  <br/>
+  <button class="btn btn-primary" type="submit" style="width: 200px;">提交</button>
 </form>
 
+<div class="copyright">
+  © 2017-2018 叶寒书网络科技 版权所有
+</div>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <script>

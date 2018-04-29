@@ -75,9 +75,7 @@ module Activitiable
 
   # 发送文本消息给上游用户
   def say_to_relaied(content)
-    Rails.logger.info "begin send relaied message from say_to_relaied"
     message = ::Wechat::Message.to(relaied_user.openid).text(content)
-    Rails.logger.info "begin send relaied message from say_to_relaied1: #{message.to_json}"
     api.custom_message_send message
   end
 
@@ -88,12 +86,9 @@ module Activitiable
   def invite_pic(background, querys)
     query = "watermark/3#{querys.join}"
     image_url = "#{background}?#{query}"
-    Rails.logger.info "generate image result: #{image_url}"
     image_path = "#{Rails.root}/public/upload/invite_#{activity.id}_#{user.id}.png"
     File.open(image_path, 'wb') {|f| f.write HTTParty.get(image_url).body }
-    media_id = (api.media_create 'image', image_path)['media_id']
-    Rails.logger.info "generated media id: #{media_id}"
-    media_id
+    (api.media_create 'image', image_path)['media_id']
   end
 
   # gravity:

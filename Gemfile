@@ -2,7 +2,7 @@ source 'https://gems.ruby-china.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.6'
+gem 'rails', '4.2.10'
 
 gem 'jquery-rails'
 # Use mysql as the database for Active Record
@@ -37,7 +37,7 @@ gem 'sinatra', require: false
 gem 'whenever'
 
 # for background job schedule
-gem 'sidekiq', '< 5'
+gem 'sidekiq', '>= 5'
 
 # for cache
 gem 'redis'

@@ -20,3 +20,7 @@ set :puma_threads, [0, 16]
 set :puma_workers, 0
 set :puma_init_active_record, false
 set :puma_preload_app, true
+
+set :sidekiq_role, :app
+set :sidekiq_config, "#{current_path}/config/sidekiq.yml"
+set :sidekiq_env, 'production'
