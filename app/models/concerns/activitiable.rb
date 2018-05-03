@@ -92,7 +92,6 @@ module Activitiable
   end
 
   # gravity:
-
   # NorthWest     |     North      |     NorthEast
   #               |                |
   #               |                |
