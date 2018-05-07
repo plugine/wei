@@ -56,6 +56,9 @@ gem 'httparty'
 # for wechat endpoint
 gem 'wechat'
 
+gem 'alipay'
+gem 'wx_pay'
+
 gem 'simple_form'
 
 

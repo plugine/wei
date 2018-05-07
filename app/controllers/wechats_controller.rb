@@ -7,11 +7,37 @@ class WechatsController < ApplicationController
     render text: params[:echostr]
   end
 
+  # /wechat/auth/:storage_name
+  def auth
+    config = StorageService.instance.get(params[:storage_name])
+    redirect_to :back, alert: '配置出错' unless config
+    config = JSON.parse(config)
+    logger.info "config: #{config}"
+    account = PublicAccount.fetch_by_name(config['account'])
+
+    logger.info "account: #{account}"
+    current_url = "#{config['domain']}/wechat/auth/#{params[:storage_name]}"
+
+    WechatService.instance.wechat_oauth2('snsapi_userinfo', current_url, account, cookies, params, self) do |openid, access_info|
+      logger.info "access info is: #{access_info.to_json}"
+      user_info = WechatService.instance.account_api(account).web_userinfo access_info['access_token'], openid
+      logger.info "EIP: wechat oauth user info: #{user_info.to_json}"
+      first_matcher = config['redirect'].to_s.index('?') ? '&' : '?'
+      redirect_url = "#{config['redirect']}#{first_matcher}openid=#{openid}&nickname=#{URI.escape user_info['nickname'].to_s}&headimgurl=#{user_info['headimgurl']}"
+      redirect_to redirect_url
+    end
+  end
+
+  # 根据传入的account生成JSAPI的config
+  def wx_config
+    render json: jsapi_config(account: params[:account], page_url: params[:page_url])
+  end
+
   # 微信消息入口
   def create
     return (head :unauthorized) unless verify_signature
     @openid = @message[:FromUserName]
-    @account = PublicAccount.fetch_by_account @message[:ToUserName]
+    @account = PublicAccount.fetch_by_name @message[:ToUserName]
 
     @api = WechatService.instance.account_api @account
 
@@ -31,6 +57,8 @@ class WechatsController < ApplicationController
       if event == 'subscribe' || event == 'SCAN'
         if event_key.blank?
           user = User.find_by_openid @openid
+          user.update alive: true if user
+
           user ||= User.create_from_hash(@account.id, @api.user(openid))
         else
           # 活动事件处理
@@ -58,6 +86,26 @@ class WechatsController < ApplicationController
     array = [token, timestamp, nonce]
     dev_msg_signature = array.compact.collect(&:to_s).sort.join
     Digest::SHA1.hexdigest(dev_msg_signature) == params[:signature]
+  end
+
+  def jsapi_config(config_options={})
+    options = config_options.symbolize_keys
+    account = PublicAccount.fetch_by_name(options[:account])
+    api = WechatService.instance.account_api account
+    app_id = account.appid
+
+    page_url = options[:page_url]
+
+    js_hash = api.jsapi_ticket.signature(page_url)
+
+    {
+        debug: false,
+        appId: app_id,
+        timestamp: js_hash[:timestamp],
+        nonceStr: js_hash[:noncestr],
+        signature: js_hash[:signature],
+        jsApiList: ['chooseWXPay']
+    }
   end
 
   def set_message

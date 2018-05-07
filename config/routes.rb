@@ -7,10 +7,19 @@ end if Rails.env.production?
 Wei::Application.routes.draw do
 
   get '/admin' => 'admin/logins#index'
-  resource :wechat, only: [:show, :create]
+
+  get '/wechat/auth/:storage_name' => 'wechats#auth'
+
+  resource :wechat, only: [:show, :create] do
+    get :wx_config, on: :collection
+  end
   mount Sidekiq::Web => '/admin/sidekiq'
 
   resources :pages, only: [:show], param: :code
-  resources :storages, param: :key
+  resources :storages, param: :key, only: [:show, :create]
   resources :types, only: [:show], param: :code
+
+  resources :payments, only: [:create] do
+    get :wx_notify, on: :collection
+  end
 end

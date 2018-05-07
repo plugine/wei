@@ -1,0 +1,30 @@
+<!--<div class="panel">-->
+  <!--<div class="panel-body">-->
+    <%= link_to "新建", new_admin_pay_config_path(type: 'WxpubPayConfig'), class: 'btn' %>
+  <!--</div>-->
+<!--</div>-->
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>配置名称</th>
+    <th>商户号</th>
+    <th>创建时间</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @cfgs.each do |cfg| %>
+    <tr>
+      <td><%= cfg.id %></td>
+      <td><%= cfg.name %></td>
+      <td><%= cfg.mch_id %></td>
+      <td><%= cfg.created_at %></td>
+      <td>
+        <%= link_to "编辑", edit_admin_pay_config_path(type: 'WxpubPayConfig', id: cfg.id), class: "btn btn" %>
+        <%= link_to "删除", admin_pay_config_path(type: 'WxpubPayConfig', id: cfg.id), method: :delete, class: "btn btn-danger", data: { confirm: '确认删除吗？' } %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

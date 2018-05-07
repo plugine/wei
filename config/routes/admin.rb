@@ -19,5 +19,11 @@ Wei::Application.routes.draw do
     resources :buttons
 
     resource :crop_users
+
+    resources :pay_configs do
+      collection do
+        get :wechat_list
+      end
+    end
   end
 end

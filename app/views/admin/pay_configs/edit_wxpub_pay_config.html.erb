@@ -1,0 +1,5 @@
+<form class="form-group" method="post" action="<%= admin_pay_config_path(@cfg) %>">
+  <input type="hidden" name="_method" value="put" />
+  <input type="hidden" name="type" value="WxpubPayConfig" />
+  <%= render 'wxpub_form' %>
+</form>

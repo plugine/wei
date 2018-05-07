@@ -100,7 +100,7 @@ body {
   top: 0;
   width: 250px;
   margin: 0;
-  padding: 0;
+  padding: 0 0 50px;
   list-style: none;
 }
 
@@ -109,10 +109,17 @@ body {
   line-height: 40px;
 }
 
+.sidebar-nav li span {
+  display: block;
+  color: #777777;
+  font-size: 12px;
+}
+
 .sidebar-nav li a {
   display: block;
+  padding-left: 20px;
   text-decoration: none;
-  color: #999999;
+  color: #9f9f9f;
 }
 
 .sidebar-nav li a:hover {
@@ -213,9 +220,11 @@ body {
         margin-right: 14px;
         > a {
           padding: 6px;
-          color: white;
-          background-color: #0a76a4;
+          color: #337ab7;
           border-radius: 3px;
+          &:hover {
+            background-color: #f1f1f1;
+          }
         }
       }
     }
@@ -236,7 +245,7 @@ body {
     color: #717171;
     font-size: 14px;
   }
-  td {
+  td, th {
     vertical-align: middle !important;
     text-align: center;
   }

@@ -31,4 +31,10 @@ module ApplicationHelper
 
   end
 
+  def pay_configs_menu
+    [
+        (link_to '公众号支付', wechat_list_admin_pay_configs_path)
+    ]
+  end
+
 end

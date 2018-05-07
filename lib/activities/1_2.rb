@@ -16,5 +16,4 @@
   say "welcome to my homeland!"
 end
 
-puts 1
     end

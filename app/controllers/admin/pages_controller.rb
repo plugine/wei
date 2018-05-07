@@ -14,7 +14,7 @@ class Admin::PagesController < Admin::BaseController
     if page.save
       redirect_to :back, alert: '创建成功'
     else
-      redirect_to :back, alert: "创建失败： #{page.errors.to_a.map(&:to_s).join("\n")}"
+      redirect_to :back, alert: "创建失败： #{page.errors.to_a.map(&:to_s).join('\n')}"
     end
   end
 

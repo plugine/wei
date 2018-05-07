@@ -1,0 +1,22 @@
+<div class="panel panel-default" style="overflow: hidden">
+  <div class="panel-heading">
+    <h3 class="panel-title">支付配置</h3>
+  </div>
+  <div class="panel-body">
+    <label>
+      名称：<input class="form-control" name="wxpub_pay_config[name]" value="<%= @cfg.name %>">
+    </label>
+    <label style="margin-left: 100px;">
+      APPID(一般以wx开头)：<input class="form-control" name="wxpub_pay_config[appid]" value="<%= @cfg.appid %>">
+    </label>
+    <div class="divider"></div>
+    <label>
+      商户号：<input class="form-control" name="wxpub_pay_config[mch_id]" value="<%= @cfg.mch_id %>">
+    </label>
+    <label style="margin-left: 100px;">
+      支付密钥：<input class="form-control" name="wxpub_pay_config[key]" value="<%= @cfg.key %>">
+    </label>
+  </div>
+</div>
+
+<button type="submit" class="btn btn-primary">提交</button>
