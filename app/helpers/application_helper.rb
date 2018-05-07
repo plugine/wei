@@ -37,4 +37,11 @@ module ApplicationHelper
     ]
   end
 
+  def ticket_orders_menu
+    [
+        (link_to '支付单列表', admin_ticket_orders_path),
+        (link_to '新建支付单', new_admin_ticket_order_path)
+    ]
+  end
+
 end

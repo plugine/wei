@@ -4,8 +4,18 @@
 </form>
 <script>
     var editor = CodeMirror.fromTextArea(document.getElementById("ruby-template"), {
-        lineNumbers: true,
-        mode: "ruby"
+        lineNumbers: false,
+        mode: "ruby",
+        extraKeys: {
+            "Esc": function(cm) {
+                cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+            },
+            "Tab": function(cm){
+                cm.replaceSelection("  " , "end");
+            }
+        },
+        tabSize: 2,
+        indentWithTabs: false
     });
     editor.setSize('auto','800px');
 </script>

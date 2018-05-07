@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180506123258) do
+ActiveRecord::Schema.define(version: 20180507172555) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "name",              limit: 255,                   null: false
@@ -91,21 +91,22 @@ ActiveRecord::Schema.define(version: 20180506123258) do
   add_index "media_resources", ["public_account_id"], name: "index_media_resources_on_public_account_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
-    t.string   "order_no",      limit: 255,                                        null: false
-    t.decimal  "price",                     precision: 8,  scale: 2
+    t.string   "order_no",      limit: 255,                                          null: false
+    t.decimal  "price",                       precision: 8,  scale: 2
     t.string   "type",          limit: 255
     t.string   "real_name",     limit: 255
     t.string   "phone",         limit: 255
     t.integer  "state",         limit: 4
     t.string   "address",       limit: 512
     t.datetime "paid_at"
-    t.decimal  "carriage",                  precision: 10, scale: 2, default: 0.0
+    t.decimal  "carriage",                    precision: 10, scale: 2, default: 0.0
     t.string   "note",          limit: 512
-    t.string   "operator_note", limit: 512
+    t.text     "operator_note", limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id",       limit: 4
     t.integer  "crop_user_id",  limit: 4
+    t.string   "title",         limit: 191
   end
 
   add_index "orders", ["order_no"], name: "index_orders_on_order_no", using: :btree
@@ -136,6 +137,7 @@ ActiveRecord::Schema.define(version: 20180506123258) do
     t.datetime "updated_at"
     t.string   "pay_data",   limit: 512
     t.text     "pay_detail", limit: 65535
+    t.string   "payment_no", limit: 255
   end
 
   create_table "public_accounts", force: :cascade do |t|

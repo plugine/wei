@@ -22,7 +22,7 @@
       <td>
         <%= link_to "预览", page_path(code: page.code), class: "btn btn-success", target: '_blank' %>
         <%= link_to "编辑", edit_admin_page_path(page, public_account_id: page.public_account.id), class: "btn btn-primary" %>
-        <%= link_to "删除", admin_page_path(page), method: :delete, data: { confirm: '确认删除吗？' }, class: "btn btn-danger" %>
+        <%= link_to "删除", admin_page_path(page, public_account_id: page.public_account.id), method: :delete, data: { confirm: '确认删除吗？' }, class: "btn btn-danger" %>
       </td>
     </tr>
   <% end %>

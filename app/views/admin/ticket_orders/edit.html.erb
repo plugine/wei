@@ -1,12 +1,12 @@
-
-<form class="form-group" method="post" action="<%= admin_activity_path(@activity) %>">
+<form class="form-group" method="post" action="<%= admin_ticket_order_path(@order) %>">
   <input type="hidden" name="_method" value="put" />
-  <%= render 'activity' %>
+  <%= render 'ticket' %>
 </form>
+
 <script>
-    var editor = CodeMirror.fromTextArea(document.getElementById("ruby-template"), {
+    const editor = CodeMirror.fromTextArea(document.getElementById("operator_note"), {
         lineNumbers: false,
-        mode: "ruby",
+        mode: "text/html",
         extraKeys: {
             "Esc": function(cm) {
                 cm.setOption("fullScreen", !cm.getOption("fullScreen"));

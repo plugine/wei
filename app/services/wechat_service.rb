@@ -47,6 +47,26 @@ class WechatService
     end
   end
 
+  def jsapi_config(config_options={})
+    options = config_options.symbolize_keys
+    account = PublicAccount.fetch_by_name(options[:account])
+    api = WechatService.instance.account_api account
+    app_id = account.appid
+
+    page_url = options[:page_url]
+
+    js_hash = api.jsapi_ticket.signature(page_url)
+
+    {
+        debug: false,
+        appId: app_id,
+        timestamp: js_hash[:timestamp],
+        nonceStr: js_hash[:noncestr],
+        signature: js_hash[:signature],
+        jsApiList: ['chooseWXPay']
+    }
+  end
+
 
   private
 

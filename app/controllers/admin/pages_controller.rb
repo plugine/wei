@@ -12,7 +12,7 @@ class Admin::PagesController < Admin::BaseController
   def create
     page = @account.pages.new page_params
     if page.save
-      redirect_to :back, alert: '创建成功'
+      redirect_to action: :account_pages, alert: '创建成功', public_account_id: @account.id
     else
       redirect_to :back, alert: "创建失败： #{page.errors.to_a.map(&:to_s).join('\n')}"
     end
@@ -39,7 +39,7 @@ class Admin::PagesController < Admin::BaseController
   def destroy
     @page = @account.pages.find(params[:id])
     @page.destroy
-    redirect_to :back, alert: '删除成功'
+    redirect_to :back
   end
 
   private

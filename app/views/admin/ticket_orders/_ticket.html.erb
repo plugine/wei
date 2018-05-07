@@ -1,0 +1,26 @@
+<div class="panel panel-default" style="overflow: hidden">
+  <div class="panel-heading">
+    <h3 class="panel-title">支付单</h3>
+  </div>
+  <div class="panel-body">
+    <label>
+      名称：<input class="form-control" name="ticket_order[title]" value="<%= @order.title %>">
+    </label>
+    <br/>
+    <label>
+      价格：<input type="number" step="0.01" class="form-control" name="ticket_order[price]" value="<%= @order.price %>">
+    </label>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">支付单详情(支持HTML)</h3>
+  </div>
+  <div class="panel-body">
+    <textarea name="ticket_order[operator_note]" id="operator_note" title="模版"><%= @order.operator_note %></textarea>
+  </div>
+
+</div>
+
+<button type="submit" class="btn btn-primary">提交</button>

@@ -3,8 +3,18 @@
 </form>
 <script>
     var editor = CodeMirror.fromTextArea(document.getElementById("json-template"), {
-        lineNumbers: true,
-        mode: "javascript"
+        lineNumbers: false,
+        mode: "javascript",
+        extraKeys: {
+            "Esc": function(cm) {
+                cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+            },
+            "Tab": function(cm){
+                cm.replaceSelection("  " , "end");
+            }
+        },
+        tabSize: 2,
+        indentWithTabs: false
     });
     editor.setSize('auto','800px');
 </script>

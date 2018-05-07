@@ -2,14 +2,18 @@
 <head>
   <title>Wei Panel</title>
   <link href="https://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.bootcss.com/codemirror/5.36.0/codemirror.min.css" rel="stylesheet">
-  <link href="https://cdn.bootcss.com/codemirror/5.36.0/theme/dracula.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/codemirror/5.37.0/codemirror.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/codemirror/5.37.0/theme/dracula.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/codemirror/5.37.0/addon/display/fullscreen.css"  rel="stylesheet">
 
 
-  <script src="https://cdn.bootcss.com/codemirror/5.36.0/codemirror.min.js"></script>
-  <script src="https://cdn.bootcss.com/codemirror/5.36.0/mode/ruby/ruby.min.js"></script>
-  <script src="https://cdn.bootcss.com/codemirror/5.36.0/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdn.bootcss.com/codemirror/5.37.0/codemirror.min.js"></script>
+  <script src="https://cdn.bootcss.com/codemirror/5.37.0/mode/ruby/ruby.min.js"></script>
+  <script src="https://cdn.bootcss.com/codemirror/5.37.0/mode/xml/xml.js"></script>
+  <script src="https://cdn.bootcss.com/codemirror/5.37.0/mode/css/css.js"></script>
+  <script src="https://cdn.bootcss.com/codemirror/5.37.0/mode/javascript/javascript.min.js"></script>
   <script src="https://cdn.bootcss.com/codemirror/5.37.0/mode/htmlmixed/htmlmixed.min.js"></script>
+  <script src="https://cdn.bootcss.com/codemirror/5.37.0/addon/display/fullscreen.min.js"></script>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
@@ -29,7 +33,7 @@
       <li><span>商店</span></li>
       <li><a href="<%= admin_pages_path %>">商品管理</a></li>
       <li><a href="<%= admin_pages_path %>">订单管理</a></li>
-      <li><a href="<%= admin_pages_path %>">快捷支付单</a></li>
+      <li><a href="<%= admin_ticket_orders_path %>">快捷支付单</a></li>
       <li><span>CRM</span></li>
       <li><a href="<%= admin_pages_path %>">表单管理</a></li>
       <li><a href="<%= admin_pages_path %>">客户公海</a></li>

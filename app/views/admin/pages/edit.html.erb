@@ -5,9 +5,19 @@
   <%= render 'page' %>
 </form>
 <script>
-    const editor = CodeMirror.fromTextArea(document.getElementById("html-template"), {
-        lineNumbers: true,
-        mode: "html"
+    const tabSizeeditor = CodeMirror.fromTextArea(document.getElementById("html-template"), {
+        lineNumbers: false,
+        mode: "text/html",
+        extraKeys: {
+            "Esc": function(cm) {
+                cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+            },
+            "Tab": function(cm){
+                cm.replaceSelection("  " , "end");
+            }
+        },
+        tabSize: 2,
+        indentWithTabs: false
     });
     editor.setSize('auto','800px');
 </script>
