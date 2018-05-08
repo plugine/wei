@@ -6,5 +6,7 @@ class PaymentsController < ApplicationController
   end
 
   def wx_notify
+    logger.info "params: #{params}"
+    render text: 'ok'
   end
 end

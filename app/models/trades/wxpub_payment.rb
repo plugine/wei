@@ -1,7 +1,7 @@
 class WxpubPayment < Payment
 
   def notify_url
-    "/payments/wx_notify"
+    "#{APP_CONFIG['domain']}/payments/wx_notify"
   end
 
   def fill_pay_data(openid, config_name)

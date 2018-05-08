@@ -1,0 +1,13 @@
+defaults: &defaults
+  domain: 'http://localhost:3000'
+
+development:
+  <<: *defaults
+  domain: 'http://wx.njupt.org'
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+  domain: 'http://weixin.njupt.org'
