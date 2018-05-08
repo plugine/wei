@@ -54,7 +54,7 @@ class WechatService
 
   def jsapi_config(config_options={})
     options = config_options.symbolize_keys
-    account = PublicAccount.fetch_by_name(options[:account])
+    account = PublicAccount.fetch_by_slug(options[:account])
     api = WechatService.instance.account_api account
     app_id = account.appid
 

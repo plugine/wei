@@ -1,6 +1,8 @@
 class Order < ActiveRecord::Base
   enum state: [:initialized, :paid, :canceled, :refunded, :finished]
 
+  has_many :payments
+
   before_create do
     self.order_no = generate_order_no
     self.state = Order.states[:initialized]

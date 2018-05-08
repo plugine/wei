@@ -1,6 +1,8 @@
 class Payment < ActiveRecord::Base
   validates_presence_of :total_fee
 
+  belongs_to :order
+
   enum state: [:initialized, :paid, :refunded, :expired]
 
   def self.generate(options={})

@@ -13,7 +13,7 @@ class WechatsController < ApplicationController
     redirect_to :back, alert: '配置出错' unless config
     config = JSON.parse(config)
     logger.info "config: #{config}"
-    account = PublicAccount.fetch_by_name(config['account'])
+    account = PublicAccount.fetch_by_slug(config['account'])
 
     logger.info "account: #{account}"
     current_url = "#{config['domain']}/wechat/auth/#{params[:storage_name]}"
