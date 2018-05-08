@@ -12,6 +12,11 @@ class WechatService
     build_api(account)
   end
 
+  def slug_api(slug)
+    account = PublicAccount.fetch_by_slug(slug.to_s)
+    build_api(account)
+  end
+
   def raw_api(account_attrs)
     options = account_attrs.symbolize_keys
     build_api_with_attr options[:appid], options[:appsecret], options[:id]

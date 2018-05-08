@@ -3,6 +3,7 @@ class PublicAccount < ActiveRecord::Base
   after_commit do
     Rails.cache.delete PublicAccount.cache_key(self.id)
     Rails.cache.delete PublicAccount.cache_key(self.name)
+    Rails.cache.delete PublicAccount.cache_key(self.slug)
   end
 
   scope :order_desc ,->{ order(id: :desc) }
@@ -40,7 +41,11 @@ class PublicAccount < ActiveRecord::Base
   end
 
   def self.fetch_by_name(name)
-    Rails.cache.fetch(cache_key(name)) {self.find_by_name(name)}
+    Rails.cache.fetch(cache_key(name)) {self.find_by_account(name)}
+  end
+
+  def self.fetch_by_slug(slug)
+    Rails.cache.fetch(cache_key(slug)) {self.find_by_slug(slug)}
   end
 
   def self.cache_key(res)

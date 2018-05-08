@@ -67,7 +67,6 @@ module Admin
       end
     end
 
-
     private
 
     def set_account
@@ -76,7 +75,7 @@ module Admin
     end
 
     def account_params
-      params.require(:public_account).permit(:name, :account, :appid, :appsecret, :menu_json)
+      params.require(:public_account).permit(:name, :account, :appid, :appsecret, :menu_json, :slug)
     end
 
   end

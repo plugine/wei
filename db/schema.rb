@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180507172555) do
+ActiveRecord::Schema.define(version: 20180508143853) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "name",              limit: 255,                   null: false
@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(version: 20180507172555) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "menu_json",  limit: 65535
+    t.string   "slug",       limit: 50
   end
 
   create_table "users", force: :cascade do |t|
