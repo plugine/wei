@@ -57,7 +57,7 @@ gem 'httparty'
 gem 'wechat'
 
 gem 'alipay'
-gem 'wx_pay'
+gem 'wx_pay', '~> 0.17.0'
 
 gem 'simple_form'
 

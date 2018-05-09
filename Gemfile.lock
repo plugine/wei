@@ -291,9 +291,9 @@ GEM
     whenever (0.10.0)
       chronic (>= 0.6.3)
     will_paginate (3.1.6)
-    wx_pay (0.14.1)
+    wx_pay (0.17.0)
       activesupport (>= 3.2)
-      rest-client (>= 1.7)
+      rest-client (>= 2.0.0)
 
 PLATFORMS
   ruby
@@ -345,7 +345,7 @@ DEPENDENCIES
   wechat
   whenever
   will_paginate
-  wx_pay
+  wx_pay (~> 0.17.0)
 
 BUNDLED WITH
    1.13.6
