@@ -21,6 +21,7 @@ class WxpubPayment < Payment
     Rails.logger.info "contnet: #{content}, pay_config: #{pay_config.as_json}"
     result = WxPay::Service.invoke_unifiedorder content,
                                                 pay_config.as_json.symbolize_keys
+    Rails.logger.info "invoke result: #{result}"
     if result.success?
       js_pay_params = {
           prepayid: result['prepay_id'],
@@ -33,6 +34,7 @@ class WxpubPayment < Payment
       )
 
       self.pay_data = pay_params.to_json
+      Rails.logger.info "pay_params: #{pay_params.to_json}"
     else
       Rails.logger.info result.to_s
     end
