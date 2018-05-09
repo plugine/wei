@@ -6,6 +6,20 @@ class WxpubPayment < Payment
 
   module ::WxPay
     module Service
+
+      def self.invoke_remote(url, payload, options = {})
+        options = WxPay.extra_rest_client_options.merge(options)
+
+        RestClient::Request.execute(
+            {
+                method: :post,
+                url: url,
+                payload: payload,
+                headers: { content_type: 'application/xml' }
+            }.merge(options)
+        )
+      end
+
       def self.invoke_unifiedorder(params, options = {})
         params = {
             appid: options.delete(:appid) || WxPay.appid,
@@ -16,7 +30,7 @@ class WxpubPayment < Payment
 
         check_required_options(params, INVOKE_UNIFIEDORDER_REQUIRED_FIELDS)
 
-        hashed = invoke_remote("https://api.mch.weixin.qq.com/pay/unifiedorder", make_payload(params), options)
+        hashed = invoke_remote("#{GATEWAY_URL}/pay/unifiedorder", make_payload(params), options)
         puts "xml result: #{hashed}"
         r = WxPay::Result.new(Hash.from_xml(hashed))
 
