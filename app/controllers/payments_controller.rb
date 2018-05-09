@@ -10,7 +10,7 @@ class PaymentsController < ApplicationController
     notify_params = params_transform
 
     payment = Payment.find_by(payment_no: notify_params[:out_trade_no])
-    payment.pay! if Payment.notify_verify? notify_params
+    payment.pay! if payment.notify_verify? notify_params
     render text: 'ok'
   end
 

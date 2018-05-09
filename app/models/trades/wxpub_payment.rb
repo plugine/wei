@@ -63,7 +63,7 @@ class WxpubPayment < Payment
     payment
   end
 
-  def self.notify_verify?(notify_params)
+  def notify_verify?(notify_params)
     WxPay::Sign.verify?(notify_params) &&
         notify_params[:return_code] == TRADE_SUCCESS_CODE &&
         notify_params[:result_code] == TRADE_SUCCESS_CODE
