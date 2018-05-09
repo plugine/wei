@@ -31,7 +31,7 @@ class WxpubPayment < Payment
         check_required_options(params, INVOKE_UNIFIEDORDER_REQUIRED_FIELDS)
 
         hashed = invoke_remote("#{GATEWAY_URL}/pay/unifiedorder", make_payload(params), options)
-        puts "xml result: #{hashed}"
+        Rails.logger.info "xml result: #{hashed}"
         r = WxPay::Result.new(Hash.from_xml(hashed))
 
         yield r if block_given?
