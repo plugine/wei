@@ -4,6 +4,29 @@ class WxpubPayment < Payment
     "#{APP_CONFIG['domain']}/payments/wx_notify"
   end
 
+  module ::WxPay
+    module Service
+      def self.invoke_unifiedorder(params, options = {})
+        params = {
+            appid: options.delete(:appid) || WxPay.appid,
+            mch_id: options.delete(:mch_id) || WxPay.mch_id,
+            key: options.delete(:key) || WxPay.key,
+            nonce_str: SecureRandom.uuid.tr('-', '')
+        }.merge(params)
+
+        check_required_options(params, INVOKE_UNIFIEDORDER_REQUIRED_FIELDS)
+
+        hashed = invoke_remote("#{GATEWAY_URL}/pay/unifiedorder", make_payload(params), options)
+        puts "xml result: #{hashed}"
+        r = WxPay::Result.new(Hash.from_xml(hashed))
+
+        yield r if block_given?
+
+        r
+      end
+    end
+  end
+
   def fill_pay_data(openid, config_name)
     generate_payment_no
 
