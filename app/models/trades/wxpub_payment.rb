@@ -52,6 +52,10 @@ class WxpubPayment < Payment
   def self.generate(options={})
     openid = options.delete(:openid)
     cfg = options.delete :pay_config_name
+
+    pay_config = WxpubPayConfig.fetch config_name
+    options[:pay_res_id] = pay_config.id
+
     payment = self.new options
     payment.fill_pay_data(openid, cfg)
 
