@@ -4,43 +4,6 @@ class WxpubPayment < Payment
     "#{APP_CONFIG['domain']}/payments/wx_notify"
   end
 
-  module ::WxPay
-    module Service
-
-      def self.invoke_remote(url, payload, options = {})
-        options = WxPay.extra_rest_client_options.merge(options)
-
-        RestClient::Request.execute(
-            {
-                method: :post,
-                url: url,
-                payload: payload,
-                headers: { content_type: 'application/xml' }
-            }.merge(options)
-        )
-      end
-
-      def self.invoke_unifiedorder(params, options = {})
-        params = {
-            appid: options.delete(:appid) || WxPay.appid,
-            mch_id: options.delete(:mch_id) || WxPay.mch_id,
-            key: options.delete(:key) || WxPay.key,
-            nonce_str: SecureRandom.uuid.tr('-', '')
-        }.merge(params)
-
-        check_required_options(params, INVOKE_UNIFIEDORDER_REQUIRED_FIELDS)
-
-        hashed = invoke_remote("#{GATEWAY_URL}/pay/unifiedorder", make_payload(params), options)
-        Rails.logger.info "xml result: #{hashed}"
-        r = WxPay::Result.new(Hash.from_xml(hashed))
-
-        yield r if block_given?
-
-        r
-      end
-    end
-  end
-
   def fill_pay_data(openid, config_name)
     generate_payment_no
 
@@ -55,10 +18,8 @@ class WxpubPayment < Payment
     }
 
     pay_config = WxpubPayConfig.fetch config_name
-    Rails.logger.info "contnet: #{content}, pay_config: #{pay_config.as_json}"
     result = WxPay::Service.invoke_unifiedorder content,
                                                 pay_config.as_json.symbolize_keys
-    Rails.logger.info "invoke result: #{result}"
     if result.success?
       js_pay_params = {
           prepayid: result['prepay_id'],
@@ -71,7 +32,6 @@ class WxpubPayment < Payment
       )
 
       self.pay_data = pay_params.to_json
-      Rails.logger.info "pay_params: #{pay_params.to_json}"
     else
       Rails.logger.info result.to_s
     end

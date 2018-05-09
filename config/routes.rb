@@ -20,6 +20,6 @@ Wei::Application.routes.draw do
   resources :types, only: [:show], param: :code
 
   resources :payments, only: [:create] do
-    get :wx_notify, on: :collection
+    post :wx_notify, on: :collection
   end
 end
