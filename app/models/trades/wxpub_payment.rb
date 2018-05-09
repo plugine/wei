@@ -53,7 +53,7 @@ class WxpubPayment < Payment
     openid = options.delete(:openid)
     cfg = options.delete :pay_config_name
 
-    pay_config = WxpubPayConfig.fetch config_name
+    pay_config = WxpubPayConfig.fetch cfg
     options[:pay_res_id] = pay_config.id
 
     payment = self.new options
