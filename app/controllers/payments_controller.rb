@@ -7,7 +7,11 @@ class PaymentsController < ApplicationController
 
   def wx_notify
     logger.info "params: #{params}"
-    logger.info "transformed: #{params_transform}"
+    notify_params = params_transform
+
+    payment = Payment.find_by(payment_no: notify_params[:out_trade_no])
+    payment.pay! if payment.notify_verify?
+
     render text: 'ok'
   end
 

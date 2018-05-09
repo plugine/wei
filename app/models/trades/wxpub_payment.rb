@@ -1,4 +1,5 @@
 class WxpubPayment < Payment
+  TRADE_SUCCESS_CODE = 'SUCCESS'
 
   def notify_url
     "#{APP_CONFIG['domain']}/payments/wx_notify"
@@ -60,6 +61,12 @@ class WxpubPayment < Payment
     payment.fill_pay_data(openid, cfg)
 
     payment
+  end
+
+  def self.notify_verify?(notify_params)
+    WxPay::Sign.verify?(notify_params) &&
+        notify_params[:return_code] == TRADE_SUCCESS_CODE &&
+        notify_params[:result_code] == TRADE_SUCCESS_CODE
   end
 
 
