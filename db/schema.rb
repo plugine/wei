@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180508143853) do
+ActiveRecord::Schema.define(version: 20180510151913) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "name",              limit: 255,                   null: false
@@ -80,6 +80,39 @@ ActiveRecord::Schema.define(version: 20180508143853) do
   add_index "events", ["event_type"], name: "index_events_on_event_type", using: :btree
   add_index "events", ["public_account_id"], name: "index_events_on_public_account_id", using: :btree
 
+  create_table "goods", force: :cascade do |t|
+    t.string   "title",        limit: 191
+    t.string   "slug",         limit: 40
+    t.integer  "state",        limit: 4,                              default: 0
+    t.decimal  "market_price",               precision: 10, scale: 2
+    t.decimal  "price",                      precision: 10, scale: 2
+    t.string   "cover_img",    limit: 255
+    t.string   "unit_name",    limit: 20
+    t.integer  "sale_count",   limit: 4,                              default: 0
+    t.string   "pics",         limit: 800
+    t.text     "content_html", limit: 65535
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "type",         limit: 255
+  end
+
+  add_index "goods", ["price"], name: "index_goods_on_price", using: :btree
+  add_index "goods", ["slug"], name: "index_goods_on_slug", using: :btree
+  add_index "goods", ["state"], name: "index_goods_on_state", using: :btree
+  add_index "goods", ["title"], name: "index_goods_on_title", using: :btree
+
+  create_table "goods_flashes", force: :cascade do |t|
+    t.boolean  "paid"
+    t.decimal  "price",                precision: 10, scale: 2
+    t.integer  "goods_id",   limit: 4
+    t.integer  "order_id",   limit: 4
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+  end
+
+  add_index "goods_flashes", ["goods_id"], name: "index_goods_flashes_on_goods_id", using: :btree
+  add_index "goods_flashes", ["order_id"], name: "index_goods_flashes_on_order_id", using: :btree
+
   create_table "media_resources", force: :cascade do |t|
     t.string   "name",              limit: 255
     t.string   "qiniu_key",         limit: 255
@@ -138,6 +171,7 @@ ActiveRecord::Schema.define(version: 20180508143853) do
     t.string   "pay_data",   limit: 512
     t.text     "pay_detail", limit: 65535
     t.string   "payment_no", limit: 255
+    t.integer  "pay_res_id", limit: 4
   end
 
   create_table "public_accounts", force: :cascade do |t|

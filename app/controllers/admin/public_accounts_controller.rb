@@ -34,7 +34,7 @@ module Admin
           format.json { render json: {code: 200} }
           format.html { redirect_to admin_public_accounts_path, alert: '创建成功' }
         else
-          errors = @account.errors.to_a.join "\n"
+          errors = @account.errors.to_a.join '\n'
           format.json { render json: {code: 419, error: errors} }
           format.html { redirect_to :back, alert: errors }
         end
@@ -59,7 +59,7 @@ module Admin
     end
 
     def destroy
-      @account.delete
+      @account.destroy
 
       respond_to do |format|
         format.json { render json: {code: 200}}

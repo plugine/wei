@@ -1,9 +1,9 @@
 <form class="form-group" method="post" action="<%= admin_ticket_orders_path %>">
-  <%= render 'ticket' %>
+  <%= render 'virtual_goods' %>
 </form>
 
 <script>
-    const editor = CodeMirror.fromTextArea(document.getElementById("operator_note"), {
+    const editor = CodeMirror.fromTextArea(document.getElementById("content_html"), {
         lineNumbers: true,
         mode: "text/html",
         extraKeys: {

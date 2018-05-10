@@ -1,0 +1,40 @@
+<div class="panel panel-default" style="overflow: hidden">
+  <div class="panel-heading">
+    <h3 class="panel-title">虚拟商品</h3>
+  </div>
+  <div class="panel-body">
+    <label>
+      名称：<input class="form-control" name="goods[title]" value="<%= @goods.title %>">
+    </label>
+    <label style="margin-left: 80px;">
+      标识：<input class="form-control" name="goods[slug]" value="<%= @goods.slug %>">
+    </label>
+    <br/>
+    <label>
+      实际售卖价格：<input type="number" step="0.01" class="form-control" name="goods[price]" value="<%= @goods.price %>">
+    </label><br/>
+    <label>
+      展示价格：<input type="number" step="0.01" class="form-control" name="goods[market_price]" value="<%= @goods.market_price %>">
+    </label>
+    <br/>
+    <label>
+      封面图地址(如果有)：<input class="form-control" name="goods[cover_img]" value="<%= @goods.cover_img %>">
+    </label>
+    <br/>
+    <label>
+      展示图地址组(如果有，多个图片使用英文竖线符|隔开)：<input class="form-control" name="goods[pics]" value="<%= @goods.pics %>">
+    </label>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">商品展示详情(HTML)</h3>
+  </div>
+  <div class="panel-body">
+    <textarea name="ticket_order[operator_note]" id="operator_note" title="模版"><%= @order.operator_note %></textarea>
+  </div>
+
+</div>
+
+<button type="submit" class="btn btn-primary">提交</button>

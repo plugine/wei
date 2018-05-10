@@ -1,0 +1,30 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>标题</th>
+    <th>标识</th>
+    <th>状态</th>
+    <th>销售数量</th>
+    <th>创建时间</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @goods.each do |goods| %>
+    <tr>
+      <td><%= goods.id %></td>
+      <td><%= goods.title %></td>
+      <td><%= goods.slug %></td>
+      <td><%= goods.state %></td>
+      <td><%= goods.sale_count %></td>
+      <td><%= goods.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+      <td>
+        <%= link_to "详情", admin_virtual_goods_path(goods), class: 'btn' %>
+        <%= link_to "编辑", edit_admin_virtual_goods_path(goods), class: "btn btn-success" %>
+        <%= link_to "删除", admin_virtual_goods_path(goods), method: :delete, data: { confirm: '确认删除吗？' }, class: "btn btn-danger" %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
