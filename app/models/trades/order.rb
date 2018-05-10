@@ -3,6 +3,9 @@ class Order < ActiveRecord::Base
 
   has_many :payments
 
+  # 订单商品快照
+  has_many :goods_flashes
+
   before_create do
     self.order_no = generate_order_no
     self.state = Order.states[:initialized]
