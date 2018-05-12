@@ -5,9 +5,10 @@ class ActivityJoinWorker
   def perform(activity_id, user_id, account_id, message, join_result)
     user = User.find(user_id)
     message = remarshal_message message
-    account = PublicAccount.find(account_id)
+    account = PublicAccount.fetch(account_id)
     api = WechatService.instance.account_api account
-    activity = Activity.fetch(activity_id)
+    activity = Activity.find(activity_id)
+    Rails.logger.info "find activity: #{activity_id}"
 
     activity = "Activity#{activity_id}".constantize.new(
         activity,
