@@ -15,6 +15,7 @@ class WechatsController < ApplicationController
     logger.info "config: #{config}"
     account = PublicAccount.fetch_by_slug(config['account'])
 
+
     logger.info "account: #{account}"
     current_url = "#{config['domain']}/wechat/auth/#{params[:storage_name]}"
 
@@ -37,6 +38,7 @@ class WechatsController < ApplicationController
   def create
     return (head :unauthorized) unless verify_signature
     @openid = @message[:FromUserName]
+
     @account = PublicAccount.fetch_by_name @message[:ToUserName]
 
     @api = WechatService.instance.account_api @account
