@@ -27,5 +27,7 @@ Wei::Application.routes.draw do
         get :wechat_list
       end
     end
+
+    resources :virtual_goods
   end
 end

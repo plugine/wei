@@ -6,6 +6,16 @@ class Order < ActiveRecord::Base
   # 订单商品快照
   has_many :goods_flashes
 
+  def generate_new(params)
+    clazz = case params.delete(:order_type)
+              when :virtual
+                GoodsOrder
+              else
+                Order
+            end
+    clazz.new params
+  end
+
   before_create do
     self.order_no = generate_order_no
     self.state = Order.states[:initialized]

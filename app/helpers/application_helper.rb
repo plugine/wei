@@ -44,4 +44,11 @@ module ApplicationHelper
     ]
   end
 
+  def virtual_goods_menu
+    [
+        (link_to '虚拟商品列表', admin_virtual_goods_path),
+        (link_to '新建虚拟商品', new_admin_virtual_good_path)
+    ]
+  end
+
 end

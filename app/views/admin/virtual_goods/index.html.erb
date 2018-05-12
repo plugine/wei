@@ -20,9 +20,9 @@
       <td><%= goods.sale_count %></td>
       <td><%= goods.created_at.strftime("%Y-%m-%d %H:%M") %></td>
       <td>
-        <%= link_to "详情", admin_virtual_goods_path(goods), class: 'btn' %>
-        <%= link_to "编辑", edit_admin_virtual_goods_path(goods), class: "btn btn-success" %>
-        <%= link_to "删除", admin_virtual_goods_path(goods), method: :delete, data: { confirm: '确认删除吗？' }, class: "btn btn-danger" %>
+        <%= link_to "查看", "/pages/vgoods?goods_id=#{goods.id}", class: 'btn' %>
+        <%= link_to "编辑", edit_admin_virtual_good_path(goods), class: "btn btn-success" %>
+        <%= link_to "删除", admin_virtual_good_path(goods), method: :delete, data: { confirm: '确认删除吗？' }, class: "btn btn-danger" %>
       </td>
     </tr>
   <% end %>

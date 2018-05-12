@@ -16,8 +16,11 @@ Wei::Application.routes.draw do
   mount Sidekiq::Web => '/admin/sidekiq'
 
   resources :pages, only: [:show], param: :code
-  resources :storages, param: :key, only: [:show, :create]
+  resources :storages, param: :key, only: [:show, :create] do
+    post :append, on: :collection
+  end
   resources :types, only: [:show], param: :code
+  resources :orders, onlt: [:show, :create]
 
   resources :payments, only: [:create] do
     post :wx_notify, on: :collection

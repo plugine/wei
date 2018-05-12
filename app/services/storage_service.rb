@@ -8,6 +8,10 @@ class StorageService
     end
   end
 
+  def append(key, value, expire)
+    set key, "#{value.to_s}\n\n-------\n\n#{get(key)}", expire
+  end
+
   def get(key)
     $redis.get key
   end
