@@ -14,6 +14,7 @@ class Activity < ActiveRecord::Base
 
   def refresh_template
     File.open(filename, 'w') {|f| f.write prepare_template}
+    $redis.set "need_reload:#{self.id}", 1
     load_activity
   end
 
