@@ -53,7 +53,7 @@ class Activity < ActiveRecord::Base
     Rails.cache.fetch(cache_key(id)) { self.find(id) }
   end
 
-  def cache_key(id)
+  def self.cache_key(id)
     "activity:#{id}"
   end
 
