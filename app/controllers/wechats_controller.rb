@@ -43,12 +43,16 @@ class WechatsController < ApplicationController
 
     @api = WechatService.instance.account_api @account
 
+
+    user = User.find_by_openid @openid
+    user ||= User.create_from_hash(@account.id, @api.user(openid))
+
     if @message[:MsgType] == 'event'
       # 事件消息
       event = @message[:Event]
       event_key = @message[:EventKey].gsub /qrscene_/, ''
 
-      logger.info "event: #{@message[:event]},  event_key: #{@message[:EventKey]}"
+      logger.info "event: #{@message[:Event]},  event_key: #{@message[:EventKey]}"
 
       if event == 'unsubscribe'
         # 取关
@@ -58,10 +62,7 @@ class WechatsController < ApplicationController
 
       if event == 'subscribe' || event == 'SCAN'
         if event_key.blank?
-          user = User.find_by_openid @openid
           user.update alive: true if user
-
-          user ||= User.create_from_hash(@account.id, @api.user(openid))
         else
           # 活动事件处理
           handle_join_activity @openid, event_key
