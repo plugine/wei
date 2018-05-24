@@ -45,7 +45,7 @@ class WechatsController < ApplicationController
 
 
     user = User.find_by_openid @openid
-    user ||= User.create_from_hash(@account.id, @api.user(openid))
+    user ||= User.create_from_hash(@account.id, @api.user(@openid))
 
     if @message[:MsgType] == 'event'
       # 事件消息
