@@ -62,6 +62,11 @@ module Activitiable
     api.custom_message_send message.reply.image(media_id) if media_id.present?
   end
 
+  def image_to_relaied(media_id)
+    message = ::Wechat::Message.to(relaied_user.openid).image(media_id)
+    api.custom_message_send message
+  end
+
   # 上游用户
   # alias_method :user_relaied, :relaied_user
   def relaied_user
