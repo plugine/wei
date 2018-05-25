@@ -91,6 +91,12 @@ module Activitiable
     (api.media_create 'image', image_path)['media_id']
   end
 
+  def single_pic(address)
+    image_path = "#{Rails.root}/public/upload/single_#{address}.png"
+    File.open(image_path, 'wb') {|f| f.write HTTParty.get(address).body }
+    (api.media_create 'image', image_path)['media_id']
+  end
+
   # gravity:
   # NorthWest     |     North      |     NorthEast
   #               |                |
