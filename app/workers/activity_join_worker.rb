@@ -8,11 +8,14 @@ class ActivityJoinWorker
     account = PublicAccount.fetch(account_id)
     api = WechatService.instance.account_api account
     activity = Activity.find(activity_id)
+
+    # 将用户加入到活动中去
+    user.activities << activity unless user.activities.include? activity
+
     if $redis.get("need_reload:#{activity_id}").to_i == 1
       activity.load_activity
       $redis.del "need_reload:#{activity_id}"
     end
-    Rails.logger.info "find activity: #{activity_id}"
 
     activity = "Activity#{activity_id}".constantize.new(
         activity,

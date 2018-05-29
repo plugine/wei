@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180510151913) do
+ActiveRecord::Schema.define(version: 20180529071311) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "name",              limit: 255,                   null: false
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20180510151913) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name",       limit: 255,                        null: false
-    t.date     "expire_at",              default: '2019-04-01'
+    t.date     "expire_at",              default: '2019-05-29'
     t.boolean  "enabled",                default: true
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -65,6 +65,22 @@ ActiveRecord::Schema.define(version: 20180510151913) do
   end
 
   add_index "crop_users", ["account"], name: "index_crop_users_on_account", using: :btree
+
+  create_table "delivery_infos", force: :cascade do |t|
+    t.string  "province",    limit: 255
+    t.string  "city",        limit: 255
+    t.string  "street",      limit: 255
+    t.string  "name",        limit: 255
+    t.string  "phone",       limit: 255
+    t.integer "user_id",     limit: 4
+    t.integer "resource_id", limit: 4
+    t.integer "activity_id", limit: 4
+    t.string  "comment",     limit: 255
+  end
+
+  add_index "delivery_infos", ["activity_id"], name: "index_delivery_infos_on_activity_id", using: :btree
+  add_index "delivery_infos", ["name"], name: "index_delivery_infos_on_name", using: :btree
+  add_index "delivery_infos", ["user_id"], name: "index_delivery_infos_on_user_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.string   "event_type",        limit: 255, null: false
@@ -185,6 +201,21 @@ ActiveRecord::Schema.define(version: 20180510151913) do
     t.text     "menu_json",  limit: 65535
     t.string   "slug",       limit: 50
   end
+
+  create_table "reminds", force: :cascade do |t|
+    t.string   "title",                  limit: 255
+    t.string   "category",               limit: 100,   default: "默认"
+    t.integer  "state",                  limit: 4,     default: 0
+    t.integer  "priority",               limit: 4,     default: 0
+    t.text     "content",                limit: 65535
+    t.datetime "remind_at",                                           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "connection_resource_id", limit: 4
+  end
+
+  add_index "reminds", ["connection_resource_id"], name: "index_reminds_on_connection_resource_id", using: :btree
+  add_index "reminds", ["remind_at"], name: "index_reminds_on_remind_at", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "from",              limit: 255,   default: "wechat"

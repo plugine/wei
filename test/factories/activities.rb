@@ -3,8 +3,7 @@ FactoryGirl.define do
     name "MyString"
     desc "MyText"
     consts "MyText"
-    template "MyText"
-    idx 1
+    template "@_do_nothing = 1"
   end
 
 end

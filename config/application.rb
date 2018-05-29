@@ -15,6 +15,8 @@ module Wei
     config.assets.compile = true
     config.assets.precompile = %w(*.js *.css *.css.erb)
 
+    config.active_record.raise_in_transactional_callbacks = true
+
     config.serve_static_files = true
 
     if Rails.env == 'production'

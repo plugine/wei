@@ -21,9 +21,19 @@ Sidekiq::Testing.inline!
 
 class ActiveSupport::TestCase
   include FactoryGirl::Syntax::Methods
+  Sidekiq::Testing.disable!
 
   def setup
     super
+  end
+
+  setup do
+    Rails.cache.clear
+  end
+
+  teardown do
+    $redis.flushdb
+    $ssdb.flushdb
   end
 
 end

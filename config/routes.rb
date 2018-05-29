@@ -25,4 +25,6 @@ Wei::Application.routes.draw do
   resources :payments, only: [:create] do
     post :wx_notify, on: :collection
   end
+
+  resource :delivery_infos, only: [:create]
 end

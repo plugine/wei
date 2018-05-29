@@ -5,7 +5,7 @@ class Activity < ActiveRecord::Base
   after_commit { Rails.cache.delete Activity.cache_key(self.id) }
 
   belongs_to :public_account
-
+  has_many :delivery_infos
   has_and_belongs_to_many :users
 
   after_commit :refresh_template, on: [:create, :update]

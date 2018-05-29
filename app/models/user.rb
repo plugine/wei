@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :activities
   has_many :orders
+  has_many :delivery_infos
 
   def self.create_from_hash(account_id, info)
     self.create info.symbolize_keys
