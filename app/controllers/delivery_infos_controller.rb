@@ -2,7 +2,7 @@ class DeliveryInfosController < ApplicationController
   before_action :set_user
 
   def create
-    info = @current_user.delivery_infos.mine.first
+    info = @current_user.delivery_infos.mine(params[:activity_id]).first
     if info
       info.update delivery_info_params
     else

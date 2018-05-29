@@ -3,7 +3,7 @@ class DeliveryInfo < ActiveRecord::Base
 
   scope :mine, -> (activity_id) { where(activity_id: activity_id) }
 
-  def create_from(activity_id, user_id, options={})
+  def self.create_from(activity_id, user_id, options={})
     self.create options.merge({
                                   user_id: user_id,
                                   activity_id: activity_id
