@@ -1,5 +1,5 @@
 class DeliveryInfo < ActiveRecord::Base
-  validates_presence_of :province, city, street, name, phone
+  validates_presence_of :province, :city, :street, :name, :phone
 
   scope :mine, -> (activity_id) { where(activity_id: activity_id) }
 
