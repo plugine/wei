@@ -19,13 +19,17 @@
 * 前后端分离（在下不善前端，很渣的那种）
 * 完整支付及订单支持
 * Docker 镜像
+* 文档编写中
 
 ## 黑科技
 * 虽说是服务号裂变引擎，其实订阅号也是稍微配置下可以用的
 * 大量使用动态语言eval特性，灵活的同时也带来很多安全隐患，操作不慎一个运营人员就能把后台搞垮。不过也带来更多试错机会和想象力（55开吧）
 
 ## 示例
-> 因安全原因，不提供在线demo预览，你可以手工安装到服务器进行测试。
+因安全原因，不提供在线demo预览，你可以手工安装到服务器进行测试。
+
+请更改database.yml更换default和production的数据库帐密
+
 > 
 > git clone 
 >
@@ -41,3 +45,44 @@
 * Mysql
 * redis 
 * ssdb (你也可以再开一个redis在8888端口替代ssdb)
+
+### 一个简单的裂变活动：
+代码：
+```ruby 
+joined_success '想免费包邮送点好东西
+
+一想到初学吉他的时候手割得生疼就想放弃是吧？没关系，尼龙弦了解一下～
+
+活动规则：
+1. 邀请29个微信好友扫码即可免费包邮送。
+2. 好友扫码接力时你会第一时间在公众号收到通知，同时会告知当前你的好友接力数。
+3. 好友扫码接力后如果取消关注，你也会收到相应通知，好友接力数-1。
+
+接力成功后，公众号会自动推送发货表单链接给你，填写收货地址后2天内即发货。
+
+温馨提示：转发分享卡到朋友圈和群会大大提高活动成功率噢。'
+
+relaied_success '你已成功接力#{relaied_user&.nickname}～'
+
+relaied_feedback '你的好友#{user&.nickname}接力了你。当前接力人数：#{relaied_user_supporters.size}'
+
+activity_success '你已成功完成活动：<a href="http://weixin.njupt.org/pages/delivery_le_10?openid=#{relaied_user.openid}&activity_id=#{activity.id}">点此填写收货地址</a> 我们会尽快安排发货。
+嫌麻烦？加我微信 "sidekiq"，直接报地址也可以的。'
+
+def start
+  if support_success?
+    say relaied_success
+    say_to_relaied relaied_feedback if relaied_user
+    (say_to_relaied activity_success) if relaied_user_supporters.size == 29
+  end
+  
+  say joined_success
+  
+  image invite_pic("http://static.njupt.org/activity_10.jpg", [
+    (image_query qr_url, 170, 'SouthWest', 60, 60, 0.25)
+  ])
+end
+```
+
+扫码体验：
+![](img/1.jpg)

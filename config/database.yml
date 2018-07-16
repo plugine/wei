@@ -51,4 +51,4 @@ production:
   <<: *default
   database: wei_pd
   username: root
-  password: passgz6374
+  password: <%= ENV['DATABASE_URL'] %>
