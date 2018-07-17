@@ -1,0 +1,25 @@
+default: &default
+  appid:  "my_appid"
+  secret: "my_secret"
+  token:  "my_token"
+  access_token: "tmp/wechat_access_token"
+  jsapi_ticket: "tmp/wechat_jsapi_ticket"
+  encoding_aes_key:  "my_encoding_aes_key"
+  encrypt_mode: false
+  timeout:    30,
+  skip_verify_ssl: true
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+# for production
+production:
+  appid:  "appid"
+  secret: "secret"
+  token:  "token"
+  access_token: "tmp/wechat_access_token4"
+  jsapi_ticket: "tmp/wechat_jsapi_ticket4"
+  #trusted_domain_fullname: "https://bhapp.boohee.cn"

@@ -1,12 +1,12 @@
 
-hosts = %w(root@47.97.202.227)
+hosts = %w(root@five)
 role :app, hosts
 role :web, hosts
 role :db,  hosts
 
 set :rails_env, :production
 
-set :repo_url, 'git@gitee.com:zhangzhongnan/wei.git'
+set :repo_url, 'git@github.com:plugine/wei.git'
 
 set :puma_state, "#{shared_path}/tmp/pids/puma.state"
 set :puma_pid,   "#{shared_path}/tmp/pids/puma.pid"

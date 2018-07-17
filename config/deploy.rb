@@ -2,7 +2,7 @@
 lock '3.5.0'
 
 set :application, 'wei'
-set :repo_url, 'git@gitee.com:zhangzhongnan/wei.git'
+set :repo_url, 'git@github.com:plugine/wei.git'
 
 set :rvm_ruby_version, '2.3.0'
 
